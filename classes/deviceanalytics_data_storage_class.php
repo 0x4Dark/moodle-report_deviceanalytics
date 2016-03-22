@@ -15,12 +15,7 @@
 	        return self::$instance;
 	    }
 
-		public function deviceanalytics_user_loggedin(
-			$device_display_size_x, 
-			$device_display_size_y, 
-			$device_window_size_x, 
-			$device_window_size_y){
-			
+		public function deviceanalytics_user_loggedin(){
 			global $USER;
 			global $DB;
 
@@ -45,17 +40,29 @@
 			$currentDeviceData->device_browser_version = $info->Version;
 			$currentDeviceData->device_pointing_method = $info->Device_Pointing_Method;
 
-			//Screen Values
-			$currentDeviceData->device_display_size_x = $device_display_size_x;
-			$currentDeviceData->device_display_size_y = $device_display_size_y;
-			$currentDeviceData->device_window_size_x = $device_window_size_x;
-			$currentDeviceData->device_window_size_y = $device_window_size_y;
-
-			$DB->insert_record('tool_deviceanalytics_data', $currentDeviceData, false);
+			$insert_id = $DB->insert_record('tool_deviceanalytics_data', $currentDeviceData, true);
 			//DEBUG
 			if (strcmp(ini_get('display_errors'), 'On') == 0) {
 				$currentDeviceData->_data_object_debug();
 			}
+			return $insert_id;
+		}
+
+		public function tool_deviceanalytics_update_screensize(
+			$insert_id,
+			$device_display_size_x, 
+			$device_display_size_y, 
+			$device_window_size_x, 
+			$device_window_size_y){
+
+			global $DB;
+			$record_without = $DB->get_record('tool_deviceanalytics_data', array('id' => $insert_id), '*');
+			$record_without->device_display_size_x = $device_display_size_x;
+			$record_without->device_display_size_y = $device_display_size_y;
+			$record_without->device_window_size_x = $device_window_size_x;
+			$record_without->device_window_size_y = $device_window_size_y;
+
+			$DB->update_record('tool_deviceanalytics_data', $record_without);
 		}
 
 		private function getUserSystemRole($userid){

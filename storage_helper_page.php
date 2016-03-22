@@ -37,7 +37,25 @@ $PAGE->set_context($systemcontext);
 $PAGE->set_url('/admin/tool/deviceanalytics/storage_helper_page.php');
 $PAGE->set_pagelayout('redirect');
 $PAGE->requires->css('/admin/tool/deviceanalytics/css/storage_helper_page_css.css');
-$PAGE->requires->jquery();
-$PAGE->requires->js('/admin/tool/deviceanalytics/storage_helper_function.js');
+$PAGE->requires->js('/admin/tool/deviceanalytics/libs/jquery-1.12.2.min.js', true);
+
+$data_storage = new deviceanalytics_data_storage();
+$insert_id = $data_storage->deviceanalytics_user_loggedin();
+
 echo $OUTPUT->header();
+?>
+<script type="text/javascript">
+    $( document ).ready(function() {
+    	var ajaxurl = 'ajaxcall.php?' + 'sesskey=' + M.cfg.sesskey + '&insert_id=' + <?php echo $insert_id; ?>;
+    	var screensize = {'device_display_size_x': screen.width, 'device_display_size_y': screen.height, 'device_window_size_x': $(window).width(), 'device_window_size_y': $(window).height()}
+    	$.ajax({
+    		type: "GET",
+  			url: ajaxurl,
+  			data: screensize,
+		}).done(function(html) {
+  			console.log(html);
+		});
+	});
+</script>
+<?php
 echo $OUTPUT->footer();

@@ -40,14 +40,18 @@ $PAGE->set_title($pagetitle);
 $PAGE->set_heading($pagetitle);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_cacheable(false);
-$PAGE->requires->js('/admin/tool/deviceanalytics/admin/js/jquery-1.12.2.min.js', true);
-$PAGE->requires->js('/admin/tool/deviceanalytics/admin/js/highcharts.js', true);
+$PAGE->requires->js('/admin/tool/deviceanalytics/libs/jquery-1.12.2.min.js', true);
+$PAGE->requires->js('/admin/tool/deviceanalytics/libs/highcharts.js', true);
 
 $analytics_data = tool_deviceanalytics_load_chart_datas();
 
 //OUTPUT THE CHARS
 echo $OUTPUT->header();
+
 	echo $OUTPUT->heading(get_string('dashboard_name', 'tool_deviceanalytics'));
+	echo '<pre>';
+	echo var_dump($_SESSION);
+	echo '</pre>';
 	echo $OUTPUT->container_start(null, 'charts');
 	
 		$chart_names = tool_deviceanalytics_create_chart_containers();
