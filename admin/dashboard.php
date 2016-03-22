@@ -25,18 +25,16 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class deviceanalytics_settings_form extends moodleform{
-	public function definition() {
-        global $CFG;
-        $mform = $this->_form;
-        $start_attr=array('readonly'=>'readonly');
-        $mform->addElement('text', 'starttime', get_string('settings_starttime', 'tool_deviceanalytics'), $start_attr);
-        $mform->setType('starttime', PARAM_RAW);
-        $mform->addElement('hidden', 'id', '1');
-        $mform->setType('id', PARAM_RAW);
-        $mform->addElement('selectyesno', 'status', get_string('settings_status', 'tool_deviceanalytics'));
-        $mform->addElement('selectyesno', 'anonymous', get_string('settings_anonymous', 'tool_deviceanalytics'));
-        $mform->addElement('selectyesno', 'admin_log', get_string('settings_admin_log', 'tool_deviceanalytics'));
-        $this->add_action_buttons();
-    }
-}
+require_once('../locallib.php');
+
+$systemcontext = context_system::instance();
+require_login();
+require_capability('tool/deviceanalytics:managesettings', $systemcontext);
+
+$pagename = 'tool_deviceanalytics_dashboard';
+$PAGE->set_context($systemcontext);
+$PAGE->set_url('/admin/tool/deviceanalytics/admin/dashboard.php');
+$PAGE->set_pagelayout('admin');
+$PAGE->set_title(get_string('settings_title', 'tool_deviceanalytics'));
+$pageheader = $PAGE->set_heading(get_string('settings_title', 'tool_deviceanalytics'), 3);
+admin_externalpage_setup($pagename);

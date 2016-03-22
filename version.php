@@ -28,7 +28,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tool_deviceanalytics';
-$plugin->version = 20160302102;
+$plugin->version = 2016032200;
 $plugin->release = 'v1.0';
 $plugin->requires = 2015051100;
 $plugin->maturity = MATURITY_ALPHA;

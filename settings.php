@@ -28,7 +28,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 if (has_capability('tool/deviceanalytics:managesettings', context_system::instance())) {
-	$ADMIN->add('root',
+	$ADMIN->add('tool',
             new admin_category('tool_deviceanalytics', get_string('pluginname', 'tool_deviceanalytics')));
+	$ADMIN->add('tool_deviceanalytics', new admin_externalpage('tool_deviceanalytics_dashboard', get_string('dashboard_name', 'tool_deviceanalytics'), "$CFG->wwwroot/$CFG->admin/tool/deviceanalytics/admin/dashboard.php"));
     $ADMIN->add('tool_deviceanalytics', new admin_externalpage('tool_deviceanalytics_settings', get_string('settings_name', 'tool_deviceanalytics'), "$CFG->wwwroot/$CFG->admin/tool/deviceanalytics/admin/settings.php"));
 }

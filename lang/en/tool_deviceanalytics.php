@@ -29,6 +29,10 @@ defined('MOODLE_INTERNAL') || die();
  
 //GLOBAL
 $string['pluginname'] = 'Device Analytics';
+
+//DASHBOARD
+$string['dashboard_name'] = 'Dashboard'; 
+
 //SETTINGS
 $string['settings_name'] = 'Settings';
 $string['settings_title'] = 'Device Analytics Settings';
