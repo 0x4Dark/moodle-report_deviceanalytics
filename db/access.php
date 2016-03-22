@@ -37,4 +37,13 @@ $capabilities = array(
         ),
         'clonepermissionsfrom' => 'moodle/site:config'
     ),
+    'tool/deviceanalytics:viewdashboard' => array(
+    	'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'manager' => CAP_ALLOW,
+        ),
+    )
  );
+

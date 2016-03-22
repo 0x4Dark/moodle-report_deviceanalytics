@@ -31,11 +31,13 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Device Analytics';
 
 //DASHBOARD
-$string['dashboard_name'] = 'Dashboard'; 
-
+$string['dashboard_name'] = 'Dashboard';
+$string['dashboard_title'] = $string['pluginname'].' Dashboard'; 
+$string['dashboard_chart_device_types'] = 'Device Types';
+$string['dashboard_chart_device_types_title'] = 'device type distributions';
 //SETTINGS
 $string['settings_name'] = 'Settings';
-$string['settings_title'] = 'Device Analytics Settings';
+$string['settings_title'] = $string['pluginname'].' Settings';
 $string['settings_starttime'] = 'Starttime';
 $string['settings_status'] = 'Active';
 $string['settings_anonymous'] = 'Anonymize';

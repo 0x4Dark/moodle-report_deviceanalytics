@@ -24,11 +24,10 @@
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tool_deviceanalytics';
-$plugin->version = 2016032200;
+$plugin->version = 2016032202;
 $plugin->release = 'v1.0';
 $plugin->requires = 2015051100;
 $plugin->maturity = MATURITY_ALPHA;

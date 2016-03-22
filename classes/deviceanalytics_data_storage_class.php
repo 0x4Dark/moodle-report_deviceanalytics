@@ -51,6 +51,7 @@
 			$currentDeviceData->device_window_size_x = $device_window_size_x;
 			$currentDeviceData->device_window_size_y = $device_window_size_y;
 
+			$DB->insert_record('tool_deviceanalytics_data', $currentDeviceData, false);
 			//DEBUG
 			if (strcmp(ini_get('display_errors'), 'On') == 0) {
 				$currentDeviceData->_data_object_debug();

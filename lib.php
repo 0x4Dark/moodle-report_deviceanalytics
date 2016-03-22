@@ -55,6 +55,7 @@ require_once('libs/Browscap.php');
 /*INCLUDES*/
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/formslib.php');
+require_once('admin/settings_form.php');
 
 include_once('redirector.php');
 include_once('classes/deviceanalytics_data_storage_class.php');

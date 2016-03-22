@@ -11,7 +11,7 @@ require(['jquery'], function($) {
   				//DEBUG
   				console.log(html);
   				//REDIRECT
-  				window.location = <?php echo '"'.$CFG->wwwroot.'"'; ?>;
+  				
 			});
 	});
 });
