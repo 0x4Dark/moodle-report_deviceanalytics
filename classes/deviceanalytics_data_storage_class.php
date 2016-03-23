@@ -23,6 +23,13 @@
 			$currentDeviceData = new deviceanalytics_data_object();
 			$currentDeviceData->user_id = $USER->id;
 			$currentDeviceData->user_hash = deviceanalytics_data_object::get_identify_hash($_SESSION['USER']);
+
+			$alreadyexits = $DB->get_record_sql('SELECT * FROM {tool_deviceanalytics_data} WHERE user_hash = ?', array($currentDeviceData->user_hash));
+
+			if(!empty($alreadyexits) || is_null($alreadyexits)){
+				return 0;
+			}
+
 			$currentDeviceData->user_role = $this->getUserSystemRole($USER->id);
 			$currentDeviceData->object_date = time();
 			$currentDeviceData->active_moodle_lang = $USER->lang;
@@ -41,10 +48,7 @@
 			$currentDeviceData->device_pointing_method = $info->Device_Pointing_Method;
 
 			$insert_id = $DB->insert_record('tool_deviceanalytics_data', $currentDeviceData, true);
-			//DEBUG
-			if (strcmp(ini_get('display_errors'), 'On') == 0) {
-				$currentDeviceData->_data_object_debug();
-			}
+			
 			return $insert_id;
 		}
 
