@@ -19,9 +19,21 @@
 			global $USER;
 			global $DB;
 
+			$pluginsetting = $DB->get_record('tool_deviceanalytics_data', array(), '*');
+			if($pluginsetting->status == 0){
+				return 0;
+			}
+			if($pluginsetting->admin_log == 0){
+				if($this->getUserSystemRole($USER->id) == 'admin'){
+					return 0;
+				}
+			}
+
 			//Standard Values
 			$currentDeviceData = new deviceanalytics_data_object();
-			$currentDeviceData->user_id = $USER->id;
+			if($pluginsetting->anonymous == 0){
+				$currentDeviceData->user_id = $USER->id;
+			}
 			$currentDeviceData->user_hash = deviceanalytics_data_object::get_identify_hash($_SESSION['USER']);
 
 			$alreadyexits = $DB->get_record_sql('SELECT * FROM {tool_deviceanalytics_data} WHERE user_hash = ?', array($currentDeviceData->user_hash));
