@@ -26,6 +26,7 @@
  */
 
 require_once('lib.php');
+ini_set('memory_limit','1024M');
 require_login();
 if ((isset($_SERVER['HTTPS'])) and ('on' == $_SERVER['HTTPS'])) {
     $CFG->httpswwwroot = 'https://'.$_SERVER['HTTP_HOST'];
