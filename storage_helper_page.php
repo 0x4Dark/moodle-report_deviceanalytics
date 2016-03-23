@@ -49,7 +49,7 @@ echo $OUTPUT->header();
 <script type="text/javascript">
     $( document ).ready(function() {
     	if(<?php echo $insert_id;?> == 0){
-    		//window.location.replace("<?php echo $CFG->wwwroot; ?>");
+    		window.location.replace("<?php echo $CFG->wwwroot; ?>");
     	}else{
     		var ajaxurl = 'ajaxcall.php?' + 'sesskey=' + M.cfg.sesskey + '&insert_id=' + <?php echo $insert_id; ?>;
     		var screensize = {
@@ -64,7 +64,7 @@ echo $OUTPUT->header();
 	  			data: screensize,
 			}).done(function(html) {
 	  			console.log(html);
-	  			//window.location.replace("<?php echo $CFG->wwwroot; ?>");
+	  			window.location.replace("<?php echo $CFG->wwwroot; ?>");
 			});
     	}
 	});

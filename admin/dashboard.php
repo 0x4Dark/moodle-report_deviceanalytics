@@ -47,14 +47,16 @@ $analytics_data = tool_deviceanalytics_load_chart_datas();
 
 //OUTPUT THE CHARS
 echo $OUTPUT->header();
-
 	echo $OUTPUT->heading(get_string('dashboard_name', 'tool_deviceanalytics'));
-	echo '<pre>';
-	echo var_dump($_SESSION);
-	echo '</pre>';
-	echo $OUTPUT->container_start(null, 'charts');
-	
-		$chart_names = tool_deviceanalytics_create_chart_containers();
-		tool_deviceanalytics_create_chart_querys($analytics_data, $chart_names);
-	echo $OUTPUT->container_end();
+	echo '<noscript>';
+		echo $OUTPUT->error_text(get_string('dashboard_nojs_error_message', 'tool_deviceanalytics'));
+	echo '</noscript>';
+	if(is_null($analytics_data)){
+		echo $OUTPUT->error_text(get_string('dashboard_no_data_error', 'tool_deviceanalytics'));
+	}else{
+		echo $OUTPUT->container_start(null, 'charts');
+			$chart_names = tool_deviceanalytics_create_chart_containers();
+			tool_deviceanalytics_create_chart_querys($analytics_data, $chart_names);
+		echo $OUTPUT->container_end();
+	}
 echo $OUTPUT->footer();

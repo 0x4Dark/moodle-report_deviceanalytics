@@ -42,6 +42,10 @@ function tool_deviceanalytics_load_chart_datas(){
 function tool_deviceanalytics_create_chart_containers(){
 	$chart_names = array();
 	$chart_names[] = tool_deviceanalytics_create_chart_container('device_types', 'dashboard_chart_device_types');
+    $chart_names[] = tool_deviceanalytics_create_chart_container('device_systems', 'dashboard_chart_device_systems');
+    $chart_names[] = tool_deviceanalytics_create_chart_container('device_browser', 'dashboard_chart_device_browser');
+    $chart_names[] = tool_deviceanalytics_create_chart_container('screen_sizes', 'dashboard_chart_screen_sizes');
+    $chart_names[] = tool_deviceanalytics_create_chart_container('window_sizes', 'dashboard_chart_window_sizes');
 	return $chart_names;
 }
 
@@ -54,17 +58,183 @@ function tool_deviceanalytics_create_chart_querys($chart_data, $chart_ids){ ?>
     				$device_types = array();
     				foreach ($chart_data as $entry) {
     					$type = $entry->device_type;
-    					if(array_key_exists( $type,$device_types))
+    					if(array_key_exists($type, $device_types))
     						$device_types[$entry->device_type]++;
     					else
     						$device_types[$entry->device_type] = 1;
     				}
-    				tool_deviceanalytics_create_pie_chart($chart_ids[0], $device_types, get_string('dashboard_chart_device_types_title', 'tool_deviceanalytics'));
+    				tool_deviceanalytics_create_pie_chart(
+                        $chart_ids[0], 
+                        $device_types, 
+                        get_string('dashboard_chart_device_types_title', 'tool_deviceanalytics')
+                    );
+                    //OPERATING SYSTEMS
+                    $device_systems = array();
+                    foreach ($chart_data as $entry) {
+                        $system = $entry->device_system;
+                        if(array_key_exists($system, $device_systems))
+                            $device_systems[$entry->device_system]++;
+                        else
+                            $device_systems[$entry->device_system] = 1;
+                    }
+                    tool_deviceanalytics_create_pie_chart(
+                        $chart_ids[1], 
+                        $device_systems, 
+                        get_string('dashboard_chart_device_systems_title', 'tool_deviceanalytics')
+                    );
+                    //DEVICE BROWSERS
+                    $device_browser = array();
+                    foreach ($chart_data as $entry) {
+                        $browser = $entry->device_browser;
+                        $browser_version = $entry->device_browser_version;
+                        if(array_key_exists($browser, $device_browser)){
+                            if(array_key_exists($entry->device_browser_version, $device_browser[$entry->device_browser]))
+                                $device_browser[$entry->device_browser][$entry->device_browser_version]++;
+                            else
+                                $device_browser[$entry->device_browser][$entry->device_browser_version] = 1;
+                        }
+                        else{
+                            $device_browser[$entry->device_browser] = array();
+                            $device_browser[$entry->device_browser][$entry->device_browser_version] = 1;
+                        }
+                    }
+                    tool_deviceanalytics_create_pie_chart_subversion(
+                        $chart_ids[2], 
+                        $device_browser, 
+                        get_string('dashboard_chart_device_browser_title', 'tool_deviceanalytics')
+                    );
+                    //SCREEN SIZES
+                    $screen_data = array_filter($chart_data, 'tool_device_analytics_is_not_null');
+                    $device_type_screen = array();
+                    foreach ($screen_data as $sizes) {
+                        $device_type_2 = $sizes->device_type;
+                        $device_screen_sol = $sizes->device_display_size_x."x".$sizes->device_display_size_y;
+                        if(array_key_exists($device_type_2, $device_type_screen)){
+                            if(array_key_exists($device_screen_sol, $device_type_screen[$sizes->device_type]))
+                                $device_type_screen[$sizes->device_type][$device_screen_sol]++;
+                            else
+                                $device_type_screen[$sizes->device_type][$device_screen_sol] = 1;
+                        }else{
+                            $device_type_screen[$sizes->device_type] = array();
+                            $device_type_screen[$sizes->device_type][$sizes->device_display_size_x."x".$sizes->device_display_size_y] = 1;                        
+                        }
+                    }
+                    tool_deviceanalytics_create_scatter_chart(
+                        $chart_ids[3], 
+                        $device_type_screen, 
+                        get_string('dashboard_chart_screen_sizes_title', 'tool_deviceanalytics')
+                    );
+                    //WINDOW SIZES
+                    $window_data = array_filter($chart_data, 'tool_device_analytics_is_not_null');
+                    $device_type_window = array();
+                    foreach ($window_data as $sizes) {
+                        $device_type_2 = $sizes->device_type;
+                        $device_window_sol = $sizes->device_window_size_x."x".$sizes->device_window_size_y;
+                        if(array_key_exists($device_type_2, $device_type_window)){
+                            if(array_key_exists($device_window_sol, $device_type_window[$sizes->device_type]))
+                                $device_type_window[$sizes->device_type][$device_window_sol]++;
+                            else
+                                $device_type_window[$sizes->device_type][$device_window_sol] = 1;
+                        }else{
+                            $device_type_window[$sizes->device_type] = array();
+                            $device_type_window[$sizes->device_type][$sizes->device_window_size_x."x".$sizes->device_window_size_y] = 1;                        
+                        }
+                    }
+                    tool_deviceanalytics_create_scatter_chart(
+                        $chart_ids[4], 
+                        $device_type_window, 
+                        get_string('dashboard_chart_window_sizes_title', 'tool_deviceanalytics')
+                    );
     			?>
     		});
     	});
     </script>
 <?php }
+
+function tool_deviceanalytics_create_scatter_chart($container_id, $data_values, $title){ ?>
+     $('#<?php echo $container_id; ?>').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: '<?php echo $title; ?>'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Width'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Height'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'bottom',
+            x: 0,
+            y: -70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                dataLabels: {
+                    formatter: function() {
+                        return this.point.value;
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x}x{point.y} count: {point.value}'
+                }
+            }
+        },
+        series: [
+        <?php
+            foreach ($data_values as $key => $value) {
+                echo '{';
+                    echo "name: '".$key."',";
+                    echo "data: [";
+                        foreach ($value as $size => $count) {
+                            echo "{";
+                                $parts = explode("x", $size);
+                                echo "x: " .$parts[0]." ,";
+                                echo "y: " .$parts[1]." ,";
+                                echo "value: " .$count;
+                            echo "},";
+                        }
+                    echo "]";
+                echo '},';
+            }
+        ?>
+       ]
+    });
+<?php
+}
 
 function tool_deviceanalytics_create_pie_chart($container_id, $data_values, $title){ ?>
 	$('#<?php echo $container_id; ?>').highcharts({
@@ -108,9 +278,136 @@ function tool_deviceanalytics_create_pie_chart($container_id, $data_values, $tit
             ]
         }]
     });
-<?php }
+<?php 
+}
 
-//deprecated
+function tool_deviceanalytics_create_pie_chart_subversion($container_id ,$data_values, $title){ ?>
+
+$(function () {
+
+    var colors = Highcharts.getOptions().colors,
+        <?php
+            $colorcounter = 0;
+            echo 'categories = [';
+                $broout = "";
+                foreach ($data_values as $key => $value) {
+                    $broout .= "'".$key."',";
+                }
+                $broout = rtrim($broout, ",");
+                echo $broout;
+            echo '],';
+            echo 'data = [';
+                foreach ($data_values as $key => $val) {
+                    echo '{';
+                        echo 'y: '. tool_device_analytics_calc_numbers_of_version($val). ',';
+                        echo 'color: colors['.$colorcounter.'],';
+                        
+                        echo 'drilldown: {';
+                            echo "name: '".$key." versions',";
+                            echo "categories: [";
+                                $catout = "";
+                                foreach ($val as $subkey => $count) {
+                                    $catout .= "'".$key." " .$subkey."',";
+                                }
+                                $catout = rtrim($catout, ",");
+                                echo $catout;
+                            echo "],";
+                            echo "data: [";
+                                $countout = "";
+                                foreach ($val as $subkey => $count) {
+                                    $countout .= $count.", ";
+                                }
+                                $countout = rtrim($countout, ",");
+                                echo $countout;
+                            echo "],";
+                            echo 'color: colors['.$colorcounter.']';
+                        echo '}, ';
+                    echo '},';
+                    $colorcounter++;
+                }
+            echo '],';
+        ?>
+        browserData = [],
+        versionsData = [],
+        i,
+        j,
+        dataLen = data.length,
+        drillDataLen,
+        brightness;
+
+
+    for (i = 0; i < dataLen; i += 1) {
+        browserData.push({
+            name: categories[i],
+            y: data[i].y,
+            color: data[i].color
+        });
+        drillDataLen = data[i].drilldown.data.length;
+        for (j = 0; j < drillDataLen; j += 1) {
+            brightness = 0.2 - (j / drillDataLen) / 5;
+            versionsData.push({
+                name: data[i].drilldown.categories[j],
+                y: data[i].drilldown.data[j],
+                color: Highcharts.Color(data[i].color).brighten(brightness).get()
+            });
+        }
+    }
+    $('#<?php echo $container_id; ?>').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: '<?php echo $title; ?>'
+        },
+        plotOptions: {
+            pie: {
+                shadow: false,
+                center: ['50%', '50%']
+            }
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        series: [{
+            name: 'Browsers',
+            data: browserData,
+            size: '60%',
+            dataLabels: {
+                formatter: function () {
+                    return this.y > 5 ? this.point.name : null;
+                },
+                color: '#ffffff',
+                distance: -30
+            }
+        }, {
+            name: 'Versions',
+            data: versionsData,
+            size: '80%',
+            innerSize: '60%',
+            dataLabels: {
+                formatter: function () {
+                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%' : null;
+                }
+            }
+        }]
+    });
+});
+
+<?php
+}
+
+function tool_device_analytics_is_not_null ($var) { 
+    return !is_null($var->device_display_size_x); 
+}
+
+function tool_device_analytics_calc_numbers_of_version($datarray){
+    $returnnumber = 0;
+    foreach ($datarray as $value) {
+         $returnnumber += $value;
+    }
+    return $returnnumber;
+}
+
 function tool_device_analytics_calc_percent($datarray, $calckey){
 	$groundvalue = 0;
 	$procvalue = $datarray[$calckey];
