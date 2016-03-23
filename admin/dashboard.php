@@ -51,7 +51,7 @@ echo $OUTPUT->header();
 	echo '<noscript>';
 		echo $OUTPUT->error_text(get_string('dashboard_nojs_error_message', 'tool_deviceanalytics'));
 	echo '</noscript>';
-	if(is_null($analytics_data)){
+	if(is_null($analytics_data) || empty($analytics_data)){
 		echo $OUTPUT->error_text(get_string('dashboard_no_data_error', 'tool_deviceanalytics'));
 	}else{
 		echo $OUTPUT->container_start(null, 'charts');

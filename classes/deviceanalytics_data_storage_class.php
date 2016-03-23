@@ -19,7 +19,7 @@
 			global $USER;
 			global $DB;
 
-			$pluginsetting = $DB->get_record('tool_deviceanalytics_data', array(), '*');
+			$pluginsetting = $DB->get_record('tool_deviceanalytics', array(), '*');
 			if($pluginsetting->status == 0){
 				return 0;
 			}
