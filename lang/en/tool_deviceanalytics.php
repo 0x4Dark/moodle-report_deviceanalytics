@@ -29,12 +29,23 @@ defined('MOODLE_INTERNAL') || die();
  
 //GLOBAL
 $string['pluginname'] = 'Device Analytics';
-
 //DASHBOARD
 $string['dashboard_name'] = 'Dashboard';
+$string['dashboard_nojs_error_message'] = 'Dashboard Charts only works if Javascript is enabled';
 $string['dashboard_title'] = $string['pluginname'].' Dashboard'; 
 $string['dashboard_chart_device_types'] = 'Device Types';
 $string['dashboard_chart_device_types_title'] = 'device type distributions';
+$string['dashboard_chart_device_systems'] = 'Operating Systems';
+$string['dashboard_chart_device_systems_title'] = 'device os';
+$string['dashboard_chart_device_browser'] = 'Browser';
+$string['dashboard_chart_device_browser_title'] = 'device browsers';
+$string['dashboard_chart_device_browser_version'] = 'browser version';
+$string['dashboard_chart_screen_sizes'] = 'Screen Sizes';
+$string['dashboard_chart_screen_sizes_title'] = 'most common user screen solutions';
+$string['dashboard_chart_window_sizes'] = 'Window Sizes';
+$string['dashboard_chart_window_sizes_title'] = 'most common user window solutions';
+$string['dashboard_chart_pointing_method'] = 'Device Pointing Methode';
+$string['dashboard_chart_pointing_method_title'] = 'device interactive input methode';
 //SETTINGS
 $string['settings_name'] = 'Settings';
 $string['settings_title'] = $string['pluginname'].' Settings';
