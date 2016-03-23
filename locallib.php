@@ -366,7 +366,7 @@ $(function () {
             }
         },
         tooltip: {
-            valueSuffix: '%'
+            pointFormat: '<b>{point.percentage:.1f}%</b>'
         },
         series: [{
             name: 'Browsers',
