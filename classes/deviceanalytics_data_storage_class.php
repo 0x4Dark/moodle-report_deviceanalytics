@@ -19,7 +19,7 @@
 			global $USER;
 			global $DB;
 
-			$pluginsetting = $DB->get_record('tool_deviceanalytics', array(), '*');
+			$pluginsetting = $DB->get_record('report_deviceanalytics', array(), '*');
 			if($pluginsetting->status == 0){
 				return 0;
 			}
@@ -36,7 +36,7 @@
 			}
 			$currentDeviceData->user_hash = deviceanalytics_data_object::get_identify_hash($_SESSION['USER']);
 
-			$alreadyexits = $DB->get_record_sql('SELECT * FROM {tool_deviceanalytics_data} WHERE user_hash = ?', array($currentDeviceData->user_hash));
+			$alreadyexits = $DB->get_record_sql('SELECT * FROM {report_deviceanalytics_data} WHERE user_hash = ?', array($currentDeviceData->user_hash));
 
 			if(!empty($alreadyexits) || is_null($alreadyexits)){
 				return 0;
@@ -59,12 +59,12 @@
 			$currentDeviceData->device_browser_version = $info->Version;
 			$currentDeviceData->device_pointing_method = $info->Device_Pointing_Method;
 
-			$insert_id = $DB->insert_record('tool_deviceanalytics_data', $currentDeviceData, true);
+			$insert_id = $DB->insert_record('report_deviceanalytics_data', $currentDeviceData, true);
 			
 			return $insert_id;
 		}
 
-		public function tool_deviceanalytics_update_screensize(
+		public function report_deviceanalytics_update_screensize(
 			$insert_id,
 			$device_display_size_x, 
 			$device_display_size_y, 
@@ -72,13 +72,13 @@
 			$device_window_size_y){
 
 			global $DB;
-			$record_without = $DB->get_record('tool_deviceanalytics_data', array('id' => $insert_id), '*');
+			$record_without = $DB->get_record('report_deviceanalytics_data', array('id' => $insert_id), '*');
 			$record_without->device_display_size_x = $device_display_size_x;
 			$record_without->device_display_size_y = $device_display_size_y;
 			$record_without->device_window_size_x = $device_window_size_x;
 			$record_without->device_window_size_y = $device_window_size_y;
 
-			$DB->update_record('tool_deviceanalytics_data', $record_without);
+			$DB->update_record('report_deviceanalytics_data', $record_without);
 		}
 
 		private function getUserSystemRole($userid){

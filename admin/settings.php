@@ -20,7 +20,7 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,36 +29,36 @@ require_once('../lib.php');
 
 $systemcontext = context_system::instance();
 require_login();
-require_capability('tool/deviceanalytics:managesettings', $systemcontext);
+require_capability('report/deviceanalytics:managesettings', $systemcontext);
 
-$pagename = 'tool_deviceanalytics_settings';
+$pagename = 'report_deviceanalytics_settings';
 $PAGE->set_context($systemcontext);
-$PAGE->set_url('/admin/tool/deviceanalytics/admin/settings.php');
+$PAGE->set_url('/report/deviceanalytics/admin/settings.php');
 $PAGE->set_pagelayout('admin');
-$PAGE->set_title(get_string('settings_title', 'tool_deviceanalytics'));
-$PAGE->set_heading(get_string('settings_title', 'tool_deviceanalytics'), 3);
+$PAGE->set_title(get_string('settings_title', 'report_deviceanalytics'));
+$PAGE->set_heading(get_string('settings_title', 'report_deviceanalytics'), 3);
 admin_externalpage_setup($pagename);
 
 $settings_form = new deviceanalytics_settings_form();
 
 if ($settings_form->is_cancelled()) {
 	echo $OUTPUT->header();
-		echo $OUTPUT->container(get_string('settings_cancelled', 'tool_deviceanalytics'), 'important', 'notice');
-		echo $OUTPUT->continue_button(new moodle_url('/admin/tool/deviceanalytics/admin/settings.php', array()));
+		echo $OUTPUT->container(get_string('settings_cancelled', 'report_deviceanalytics'), 'important', 'notice');
+		echo $OUTPUT->continue_button(new moodle_url('/report/deviceanalytics/admin/settings.php', array()));
 	echo $OUTPUT->footer();
 	
 } else if ($fromform = $settings_form->get_data()) {
-	$DB->update_record('tool_deviceanalytics', $fromform);
+	$DB->update_record('report_deviceanalytics', $fromform);
 	echo $OUTPUT->header();
-		echo $OUTPUT->container(get_string('settings_updated', 'tool_deviceanalytics'), 'important', 'notice');
-		echo $OUTPUT->continue_button(new moodle_url('/admin/tool/deviceanalytics/admin/settings.php', array()));
+		echo $OUTPUT->container(get_string('settings_updated', 'report_deviceanalytics'), 'important', 'notice');
+		echo $OUTPUT->continue_button(new moodle_url('/report/deviceanalytics/admin/settings.php', array()));
 	echo $OUTPUT->footer();
 }else { 
 	global $time_format;
-	$db_data = $DB->get_record('tool_deviceanalytics', array(), '*');
+	$db_data = $DB->get_record('report_deviceanalytics', array(), '*');
 	$settings_form->set_data($db_data);
 	echo $OUTPUT->header();
-		echo $OUTPUT->heading(get_string('settings_title', 'tool_deviceanalytics'));
+		echo $OUTPUT->heading(get_string('settings_title', 'report_deviceanalytics'));
 		$settings_form->display();
 	echo $OUTPUT->footer();
 }

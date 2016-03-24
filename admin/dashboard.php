@@ -20,43 +20,43 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(dirname(__FILE__).'/../../../../config.php');
+require_once(dirname(__FILE__).'/../../../config.php');
 require_once('../locallib.php');
 $systemcontext = context_system::instance();
 
 require_login();
-require_capability('tool/deviceanalytics:viewdashboard', $systemcontext);
+require_capability('report/deviceanalytics:viewdashboard', $systemcontext);
 
-$pagename = 'tool_deviceanalytics_dashboard';
-$pagetitle = get_string('dashboard_title', 'tool_deviceanalytics');
+$pagename = 'report_deviceanalytics_dashboard';
+$pagetitle = get_string('dashboard_title', 'report_deviceanalytics');
 $PAGE->set_context($systemcontext);
-$PAGE->set_url('/admin/tool/deviceanalytics/admin/dashboard.php');
+$PAGE->set_url('/report/deviceanalytics/admin/dashboard.php');
 $PAGE->set_title($pagetitle);
 $PAGE->set_heading($pagetitle);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_cacheable(false);
-$PAGE->requires->js('/admin/tool/deviceanalytics/libs/jquery-1.12.2.min.js', true);
-$PAGE->requires->js('/admin/tool/deviceanalytics/libs/highcharts.js', true);
+$PAGE->requires->js('/report/deviceanalytics/libs/jquery-1.12.2.min.js', true);
+$PAGE->requires->js('/report/deviceanalytics/libs/highcharts.js', true);
 
-$analytics_data = tool_deviceanalytics_load_chart_datas();
+$analytics_data = report_deviceanalytics_load_chart_datas();
 
 //OUTPUT THE CHARS
 echo $OUTPUT->header();
-	echo $OUTPUT->heading(get_string('dashboard_name', 'tool_deviceanalytics'));
+	echo $OUTPUT->heading(get_string('dashboard_name', 'report_deviceanalytics'));
 	echo '<noscript>';
-		echo $OUTPUT->error_text(get_string('dashboard_nojs_error_message', 'tool_deviceanalytics'));
+		echo $OUTPUT->error_text(get_string('dashboard_nojs_error_message', 'report_deviceanalytics'));
 	echo '</noscript>';
-	if(is_null($analytics_data) || empty($analytics_data)){
-		echo $OUTPUT->error_text(get_string('dashboard_no_data_error', 'tool_deviceanalytics'));
+	if((is_null($analytics_data)) || (empty($analytics_data))){
+		echo $OUTPUT->error_text(get_string('dashboard_no_data_error', 'report_deviceanalytics'));
 	}else{
 		echo $OUTPUT->container_start(null, 'charts');
-			$chart_names = tool_deviceanalytics_create_chart_containers();
-			tool_deviceanalytics_create_chart_querys($analytics_data, $chart_names);
+			$chart_names = report_deviceanalytics_create_chart_containers();
+			report_deviceanalytics_create_chart_querys($analytics_data, $chart_names);
 		echo $OUTPUT->container_end();
 	}
 echo $OUTPUT->footer();

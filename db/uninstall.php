@@ -20,11 +20,11 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function xmldb_tool_deviceanalytics_uninstall() {
+function xmldb_report_deviceanalytics_uninstall() {
     return true;
 }

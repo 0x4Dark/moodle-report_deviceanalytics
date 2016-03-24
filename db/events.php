@@ -28,7 +28,7 @@ $observers = array(
     array(
         'eventname'   => 'core\event\user_loggedin',
         'callback'    => 'deviceanalytics_redirector::init',
-        'includefile' => '/admin/tool/deviceanalytics/lib.php',
+        'includefile' => '/report/deviceanalytics/lib.php',
         'internal'    => true,
         'priority'    => 9999,
     ),

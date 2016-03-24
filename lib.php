@@ -20,13 +20,13 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /*LOADING MOODLE*/
-require_once(dirname(__FILE__).'/../../../config.php');
+require_once(dirname(__FILE__).'/../../config.php');
 
 /*DEBUG*/
 error_reporting(E_ALL);
@@ -45,9 +45,9 @@ $time_format = 'd-m-Y G:i:s';
 
 /*TABLE*/
 $db_tables = array();
-$db_tables['deviceanalytics'] = 'tool_deviceanalytics';
-$db_tables['deviceanalytics_data'] = 'tool_deviceanalytics_data';
-$db_tables['deviceanalytics_settings'] = 'tool_deviceanalytics_settings';
+$db_tables['deviceanalytics'] = 'report_deviceanalytics';
+$db_tables['deviceanalytics_data'] = 'report_deviceanalytics_data';
+$db_tables['deviceanalytics_settings'] = 'report_deviceanalytics_settings';
 
 /*EXTERN LIBS*/
 require_once('libs/Browscap.php');

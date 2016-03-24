@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="admin/tool/deviceanalytics/db" VERSION="20160321" COMMENT="XMLDB file for Moodle admin/tool/deviceanalytics"
+<XMLDB PATH="report/deviceanalytics/db" VERSION="20160321" COMMENT="XMLDB file for Moodle report/deviceanalytics"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="tool_deviceanalytics" COMMENT="Default comment for tool_deviceanalytics">
+    <TABLE NAME="report_deviceanalytics" COMMENT="Default comment for report_deviceanalytics">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="starttime" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="time that the tracking starts"/>
@@ -16,7 +16,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="tool_deviceanalytics_data" COMMENT="data for the table">
+    <TABLE NAME="report_deviceanalytics_data" COMMENT="data for the table">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>

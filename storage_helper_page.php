@@ -20,7 +20,7 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,10 +35,10 @@ if ((isset($_SERVER['HTTPS'])) and ('on' == $_SERVER['HTTPS'])) {
 }
 $systemcontext = context_system::instance();
 $PAGE->set_context($systemcontext);
-$PAGE->set_url('/admin/tool/deviceanalytics/storage_helper_page.php');
+$PAGE->set_url('/report/deviceanalytics/storage_helper_page.php');
 $PAGE->set_pagelayout('redirect');
-$PAGE->requires->css('/admin/tool/deviceanalytics/css/storage_helper_page_css.css');
-$PAGE->requires->js('/admin/tool/deviceanalytics/libs/jquery-1.12.2.min.js', true);
+$PAGE->requires->css('/report/deviceanalytics/css/storage_helper_page_css.css');
+$PAGE->requires->js('/report/deviceanalytics/libs/jquery-1.12.2.min.js', true);
 
 $data_storage = new deviceanalytics_data_storage();
 $insert_id = $data_storage->deviceanalytics_user_loggedin();

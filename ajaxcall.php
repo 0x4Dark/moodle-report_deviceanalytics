@@ -20,7 +20,7 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -36,7 +36,7 @@ $device_window_size_y = required_param('device_window_size_y', PARAM_INT);
 
 echo $insert_id;
 $data_storage = new deviceanalytics_data_storage();
-$data_storage->tool_deviceanalytics_update_screensize(
+$data_storage->report_deviceanalytics_update_screensize(
 	$insert_id,
 	$device_display_size_x, 
 	$device_display_size_y, 

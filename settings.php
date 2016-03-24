@@ -20,16 +20,33 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-if (has_capability('tool/deviceanalytics:managesettings', context_system::instance())) {
-	$ADMIN->add('tools',
-            new admin_category('tool_deviceanalytics', get_string('pluginname', 'tool_deviceanalytics')));
-	$ADMIN->add('tool_deviceanalytics', new admin_externalpage('tool_deviceanalytics_dashboard', get_string('dashboard_name', 'tool_deviceanalytics'), "$CFG->wwwroot/$CFG->admin/tool/deviceanalytics/admin/dashboard.php"));
-    $ADMIN->add('tool_deviceanalytics', new admin_externalpage('tool_deviceanalytics_settings', get_string('settings_name', 'tool_deviceanalytics'), "$CFG->wwwroot/$CFG->admin/tool/deviceanalytics/admin/settings.php"));
+if (has_capability('report/deviceanalytics:managesettings', context_system::instance())) {
+	$ADMIN->add('reports',
+   		new admin_category(
+            'report_deviceanalytics', 
+            get_string('pluginname', 'report_deviceanalytics')
+       	)
+    );
+	$ADMIN->add('report_deviceanalytics', 
+		new admin_externalpage(
+			'report_deviceanalytics_dashboard', 
+			get_string('dashboard_name', 'report_deviceanalytics'), 
+			new moodle_url('/report/deviceanalytics/admin/dashboard.php')
+		)
+	);
+    $ADMIN->add('report_deviceanalytics', 
+    	new admin_externalpage(
+    		'report_deviceanalytics_settings', 
+    		get_string('settings_name', 'report_deviceanalytics'), 
+    		new moodle_url('/report/deviceanalytics/admin/settings.php')
+    	)
+    );
 }
+$settings = null;

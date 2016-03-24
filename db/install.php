@@ -25,7 +25,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function xmldb_tool_deviceanalytics_install() {
+function xmldb_report_deviceanalytics_install() {
 	/*INSERT STANDARD CONFIG*/
 	global $DB;
 	$install_record = new stdClass();
@@ -33,8 +33,8 @@ function xmldb_tool_deviceanalytics_install() {
 	$install_record->status = 1;
 	$install_record->anonymous = 0;
 	$install_record->admin_log = 0;
-	$DB->insert_record('tool_deviceanalytics', $install_record);
+	$DB->insert_record('report_deviceanalytics', $install_record);
 }
 
-function xmldb_tool_deviceanalytics_install_recovery() {
+function xmldb_report_deviceanalytics_install_recovery() {
 }

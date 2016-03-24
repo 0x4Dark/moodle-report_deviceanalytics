@@ -20,7 +20,7 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,13 +30,13 @@ class deviceanalytics_settings_form extends moodleform{
         global $CFG;
         $mform = $this->_form;
         $start_attr=array('readonly'=>'readonly');
-        $mform->addElement('text', 'starttime', get_string('settings_starttime', 'tool_deviceanalytics'), $start_attr);
+        $mform->addElement('text', 'starttime', get_string('settings_starttime', 'report_deviceanalytics'), $start_attr);
         $mform->setType('starttime', PARAM_RAW);
         $mform->addElement('hidden', 'id', '1');
         $mform->setType('id', PARAM_RAW);
-        $mform->addElement('selectyesno', 'status', get_string('settings_status', 'tool_deviceanalytics'));
-        $mform->addElement('selectyesno', 'anonymous', get_string('settings_anonymous', 'tool_deviceanalytics'));
-        $mform->addElement('selectyesno', 'admin_log', get_string('settings_admin_log', 'tool_deviceanalytics'));
+        $mform->addElement('selectyesno', 'status', get_string('settings_status', 'report_deviceanalytics'));
+        $mform->addElement('selectyesno', 'anonymous', get_string('settings_anonymous', 'report_deviceanalytics'));
+        $mform->addElement('selectyesno', 'admin_log', get_string('settings_admin_log', 'report_deviceanalytics'));
         $this->add_action_buttons();
     }
 }
