@@ -27,28 +27,25 @@
 
 class deviceanalytics_data_object{
     public $userid, $userhash, $userrole, $objectdate, $activemoodlelang;
-    public $devicetype, $device_system, $devicebrowser, $devicebrowserversion, 
-    $devicedisplaysizex, $devicedisplaysizey, $devicewindowsizex, 
+    public $devicetype, $devicesystem, $devicebrowser, $devicebrowserversion,
+    $devicedisplaysizex, $devicedisplaysizey, $devicewindowsizex,
     $devicewindowsizey, $devicepointingmethod;
     public $httpuserag, $httpssl, $httpacclang;
-    
     public function __construct() {
         $this->httpuserag = htmlentities($_SERVER['HTTP_USER_AGENT']);
         if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
             $this->httpssl = $_SERVER['HTTPS'];
-        }
-        else {
+        } else {
             $this->httpssl = 'off';
         }
         $this->httpacclang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
     }
-    public static function get_identify_hash($usersession){
+    public static function get_identify_hash($usersession) {
         $usersession = $usersession->sesskey;
         $salt = sha1(md5($usersession));
         return $anonymoushash = md5($usersession.$salt);
     }
-
-    public function _data_object_debug(){
+    public function _data_object_debug() {
         var_dump(get_object_vars($this));
     }
 }

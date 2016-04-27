@@ -37,8 +37,8 @@ $devicewindowsizey = required_param('device_window_size_y', PARAM_INT);
 $datastorage = new deviceanalytics_data_storage();
 $datastorage->report_deviceanalytics_update_screensize(
     $insertid,
-    $devicedisplaysizex, 
-    $devicedisplaysizey, 
-    $devicewindowsizex, 
+    $devicedisplaysizex,
+    $devicedisplaysizey,
+    $devicewindowsizex,
     $devicewindowsizey
 );

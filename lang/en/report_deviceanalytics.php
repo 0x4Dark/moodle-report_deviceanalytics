@@ -23,17 +23,17 @@
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/ 
+ */
 
 defined('MOODLE_INTERNAL') || die();
- 
-//GLOBAL
+
+// GLOBAL
 $string['pluginname'] = 'Device Analytics';
-//DASHBOARD
+// DASHBOARD
 $string['dashboard_name'] = 'Dashboard';
 $string['dashboard_no_data_error'] = 'No analytics data exists';
 $string['dashboard_nojs_error_message'] = 'Dashboard Charts only works if Javascript is enabled';
-$string['dashboard_title'] = $string['pluginname'].' Dashboard'; 
+$string['dashboard_title'] = $string['pluginname'].' Dashboard';
 $string['dashboard_chart_device_types'] = 'Device Types';
 $string['dashboard_chart_device_types_title'] = 'device type distributions';
 $string['dashboard_chart_device_systems'] = 'Operating Systems';
@@ -49,7 +49,7 @@ $string['dashboard_chart_window_sizes_title'] = 'most common user window solutio
 $string['dashboard_chart_window_sizes_subtitle'] = 'seperated by devices';
 $string['dashboard_chart_pointing_method'] = 'Device Pointing Methode';
 $string['dashboard_chart_pointing_method_title'] = 'device interactive input methode';
-//SETTINGS
+// SETTINGS
 $string['settings_name'] = 'Settings';
 $string['settings_title'] = $string['pluginname'].' Settings';
 $string['settings_starttime'] = 'Starttime';

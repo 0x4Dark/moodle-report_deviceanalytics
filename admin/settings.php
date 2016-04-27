@@ -40,15 +40,14 @@ if ($settingsform->is_cancelled()) {
         echo $OUTPUT->container(get_string('settings_cancelled', 'report_deviceanalytics'), 'important', 'notice');
         echo $OUTPUT->continue_button(new moodle_url('/report/deviceanalytics/admin/settings.php', array()));
     echo $OUTPUT->footer();
-    
 } else if ($fromform = $settingsform->get_data()) {
     $DB->update_record('report_deviceanalytics', $fromform);
     echo $OUTPUT->header();
         echo $OUTPUT->container(get_string('settings_updated', 'report_deviceanalytics'), 'important', 'notice');
         echo $OUTPUT->continue_button(new moodle_url('/report/deviceanalytics/admin/settings.php', array()));
     echo $OUTPUT->footer();
-}else { 
-    global $time_format;
+} else {
+    global $timeformat;
     $dbdata = $DB->get_record('report_deviceanalytics', array(), '*');
     $settingsform->set_data($dbdata);
     echo $OUTPUT->header();

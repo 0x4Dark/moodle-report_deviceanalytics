@@ -23,16 +23,16 @@
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/ 
+ */
 
 defined('MOODLE_INTERNAL') || die();
- 
-//GLOBAL
+
+// GLOBAL
 $string['pluginname'] = 'Geräte Analytik';
-//DASHBOARD
+// DASHBOARD
 $string['dashboard_name'] = 'Übersicht';
 $string['dashboard_nojs_error_message'] = 'Die Übersicht Grafiken funktionieren nur, wenn Javascript aktiviert ist';
-$string['dashboard_title'] = $string['pluginname'].' Übersicht'; 
+$string['dashboard_title'] = $string['pluginname'].' Übersicht';
 $string['dashboard_chart_device_types'] = 'Geräte Typen';
 $string['dashboard_chart_device_types_title'] = 'Verteilung von Geräte Typen';
 $string['dashboard_chart_device_systems'] = 'Betriebssysteme';
@@ -46,7 +46,7 @@ $string['dashboard_chart_window_sizes'] = 'Fenstergröße';
 $string['dashboard_chart_window_sizes_title'] = 'meist genutzte Fenstergröße';
 $string['dashboard_chart_pointing_method'] = 'Eingabemethode';
 $string['dashboard_chart_pointing_method_title'] = 'Geräte Interaktionsmethode';
-//SETTINGS
+// SETTINGS
 $string['settings_name'] = 'Einstellungen';
 $string['settings_title'] = $string['pluginname'].' Einstellungen';
 $string['settings_starttime'] = 'Startzeit';

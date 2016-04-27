@@ -28,10 +28,6 @@
 /*LOADING MOODLE*/
 require_once(dirname(__FILE__).'/../../config.php');
 
-/*DEBUG*/
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
-
 /*GLOBAL REQUIREMENTS*/
 global $CFG;
 global $PAGE;
@@ -41,13 +37,13 @@ global $USER;
 global $ADMIN;
 
 /*HELPER*/
-$time_format = 'd-m-Y G:i:s';
+$timeformat = 'd-m-Y G:i:s';
 
 /*TABLE*/
-$db_tables = array();
-$db_tables['deviceanalytics'] = 'report_deviceanalytics';
-$db_tables['deviceanalytics_data'] = 'report_deviceanalytics_data';
-$db_tables['deviceanalytics_settings'] = 'report_deviceanalytics_settings';
+$dbtables = array();
+$dbtables['deviceanalytics'] = 'report_deviceanalytics';
+$dbtables['deviceanalytics_data'] = 'report_deviceanalytics_data';
+$dbtables['deviceanalytics_settings'] = 'report_deviceanalytics_settings';
 
 /*EXTERN LIBS*/
 require_once('libs/Browscap.php');
@@ -57,7 +53,7 @@ require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once('admin/settings_form.php');
 
-include_once('redirector.php');
-include_once('classes/deviceanalytics_data_storage_class.php');
-include_once('classes/deviceanalytics_data_object_class.php');
+require_once('redirector.php');
+require_once('classes/deviceanalytics_data_storage_class.php');
+require_once('classes/deviceanalytics_data_object_class.php');
 require_once('locallib.php');

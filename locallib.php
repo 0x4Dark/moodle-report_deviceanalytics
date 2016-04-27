@@ -28,18 +28,19 @@
 defined('MOODLE_INTERNAL') || die();
 
 // CHARTS
-$DADATATABLE = 'report_deviceanalytics_data';
+$datatable = 'report_deviceanalytics_data';
 
-function report_deviceanalytics_load_chart_datas(){
-    global $DB, $DADATATABLE;
-    $chartsdata = $DB->get_records($DADATATABLE);
-    if(! empty($chartsdata) || ! is_null($chartsdata))
+function report_deviceanalytics_load_chart_datas() {
+    global $DB, $datatable;
+    $chartsdata = $DB->get_records($datatable);
+    if (! empty($chartsdata) || ! is_null($chartsdata)) {
         return $chartsdata;
-    else
-        return NULL;
+    } else {
+        return null;
+    }
 }
 
-function report_deviceanalytics_create_chart_containers(){
+function report_deviceanalytics_create_chart_containers() {
     $chartnames = array();
     $chartnames[] = report_deviceanalytics_create_chart_container('device_types', 'dashboard_chart_device_types');
     $chartnames[] = report_deviceanalytics_create_chart_container('device_systems', 'dashboard_chart_device_systems');
@@ -49,121 +50,114 @@ function report_deviceanalytics_create_chart_containers(){
     return $chartnames;
 }
 
-function report_deviceanalytics_create_chart_querys($chartdata, $chartids){ ?>
-    <script type="text/javascript">
-        $(function () {
-            $(document).ready(function () {
-                <?php
-                    // DEVICE TYPES
-                    $devicetypes = array();
-                    foreach ($chartdata as $entry) {
-                        $type = $entry->devicetype;
-                        if (array_key_exists($type, $devicetypes)) {
-                            $devicetypes[$entry->devicetype]++;
-                        }
-                        else {
-                            $devicetypes[$entry->devicetype] = 1;
-                        }
-                    }
-                    report_deviceanalytics_create_pie_chart(
-                        $chartids[0], 
-                        $devicetypes, 
-                        get_string('dashboard_chart_device_types_title', 'report_deviceanalytics')
-                    );
-                    // OPERATING SYSTEMS
-                    $devicesystems = array();
-                    foreach ($chartdata as $entry) {
-                        $system = $entry->devicesystem;
-                        if (array_key_exists($system, $devicesystems)) {
-                            $devicesystems[$entry->devicesystem]++;
-                        }
-                        else {
-                            $devicesystems[$entry->devicesystem] = 1;
-                        }
-                    }
-                    report_deviceanalytics_create_pie_chart(
-                        $chartids[1], 
-                        $devicesystems, 
-                        get_string('dashboard_chart_device_systems_title', 'report_deviceanalytics')
-                    );
-                    // DEVICE BROWSERS
-                    $devicebrowser = array();
-                    foreach ($chartdata as $entry) {
-                        $browser = $entry->devicebrowser;
-                        $browserversion = $entry->devicebrowserversion;
-                        if (array_key_exists($browser, $devicebrowser)) {
-                            if (array_key_exists($entry->devicebrowserversion, $devicebrowser[$entry->devicebrowser])) {
-                                $devicebrowser[$entry->devicebrowser][$entry->devicebrowserversion]++;
-                            }
-                            else {
-                                $devicebrowser[$entry->devicebrowser][$entry->devicebrowserversion] = 1;
-                            }
-                        }
-                        else {
-                            $devicebrowser[$entry->devicebrowser] = array();
+function report_deviceanalytics_create_chart_querys($chartdata, $chartids) {
+?>
+<script type="text/javascript">
+    $(function () {
+        $(document).ready(function () {
+            <?php
+            // DEVICE TYPES
+            $devicetypes = array();
+            foreach ($chartdata as $entry) {
+                $type = $entry->devicetype;
+                if (array_key_exists($type, $devicetypes)) {
+                    $devicetypes[$entry->devicetype]++;
+                } else {
+                    $devicetypes[$entry->devicetype] = 1;
+                }
+            }
+            report_deviceanalytics_create_pie_chart(
+                $chartids[0],
+                $devicetypes,
+                get_string('dashboard_chart_device_types_title', 'report_deviceanalytics')
+            );
+            // OPERATING SYSTEMS
+            $devicesystems = array();
+            foreach ($chartdata as $entry) {
+                $system = $entry->devicesystem;
+                if (array_key_exists($system, $devicesystems)) {
+                    $devicesystems[$entry->devicesystem]++;
+                } else {
+                    $devicesystems[$entry->devicesystem] = 1;
+                }
+            }
+                report_deviceanalytics_create_pie_chart(
+                    $chartids[1],
+                    $devicesystems,
+                    get_string('dashboard_chart_device_systems_title', 'report_deviceanalytics')
+                );
+                // DEVICE BROWSERS
+                $devicebrowser = array();
+                foreach ($chartdata as $entry) {
+                    $browser = $entry->devicebrowser;
+                    $browserversion = $entry->devicebrowserversion;
+                    if (array_key_exists($browser, $devicebrowser)) {
+                        if (array_key_exists($entry->devicebrowserversion, $devicebrowser[$entry->devicebrowser])) {
+                            $devicebrowser[$entry->devicebrowser][$entry->devicebrowserversion]++;
+                        } else {
                             $devicebrowser[$entry->devicebrowser][$entry->devicebrowserversion] = 1;
                         }
+                    } else {
+                        $devicebrowser[$entry->devicebrowser] = array();
+                        $devicebrowser[$entry->devicebrowser][$entry->devicebrowserversion] = 1;
                     }
-                    report_deviceanalytics_create_pie_chart_subversion(
-                        $chartids[2], 
-                        $devicebrowser, 
-                        get_string('dashboard_chart_device_browser_title', 'report_deviceanalytics')
-                    );
-                    // SCREEN SIZES
-                    $screendata = array_filter($chartdata, 'report_device_analytics_is_not_null');
-                    $devicetypescreen = array();
-                    foreach ($screendata as $sizes) {
-                        $devicetype2 = $sizes->devicetype;
-                        $devicescreensol = $sizes->devicedisplaysizex."x".$sizes->devicedisplaysizey;
-                        if (array_key_exists($devicetype2, $devicetypescreen)) {
-                            if (array_key_exists($devicescreensol, $devicetypescreen[$sizes->devicetype])) {
-                                $devicetypescreen[$sizes->devicetype][$devicescreensol]++;
-                            }
-                            else {
-                                $devicetypescreen[$sizes->devicetype][$devicescreensol] = 1;
-                            }
+                }
+                report_deviceanalytics_create_pie_chart_subversion(
+                    $chartids[2],
+                    $devicebrowser,
+                    get_string('dashboard_chart_device_browser_title', 'report_deviceanalytics')
+                );
+                // SCREEN SIZES
+                $screendata = array_filter($chartdata, 'report_device_analytics_is_not_null');
+                $devicetypescreen = array();
+                foreach ($screendata as $sizes) {
+                    $devicetype2 = $sizes->devicetype;
+                    $devicescreensol = $sizes->devicedisplaysizex."x".$sizes->devicedisplaysizey;
+                    if (array_key_exists($devicetype2, $devicetypescreen)) {
+                        if (array_key_exists($devicescreensol, $devicetypescreen[$sizes->devicetype])) {
+                            $devicetypescreen[$sizes->devicetype][$devicescreensol]++;
+                        } else {
+                            $devicetypescreen[$sizes->devicetype][$devicescreensol] = 1;
                         }
-                        else {
-                            $devicetypescreen[$sizes->devicetype] = array();
-                            $devicetypescreen[$sizes->devicetype][$sizes->devicedisplaysizex."x".$sizes->devicedisplaysizey] = 1;                        
-                        }
+                    } else {
+                        $devicetypescreen[$sizes->devicetype] = array();
+                        $devicetypescreen[$sizes->devicetype][$sizes->devicedisplaysizex."x".$sizes->devicedisplaysizey] = 1;
                     }
-                    report_deviceanalytics_create_scatter_chart(
-                        $chartids[3], 
-                        $devicetypescreen, 
-                        get_string('dashboard_chart_screen_sizes_title', 'report_deviceanalytics')
-                    );
-                    // WINDOW SIZES
-                    $windowdata = array_filter($chartdata, 'report_device_analytics_is_not_null');
-                    $devicetypewindow = array();
-                    foreach ($windowdata as $sizes) {
-                        $devicetype2 = $sizes->devicetype;
-                        $devicewindowsol = $sizes->devicewindowsizex."x".$sizes->devicewindowsizey;
-                        if (array_key_exists($devicetype2, $devicetypewindow)) {
-                            if (array_key_exists($devicewindowsol, $devicetypewindow[$sizes->devicetype])) {
-                                $devicetypewindow[$sizes->devicetype][$devicewindowsol]++;
-                            }
-                            else {
-                                $devicetypewindow[$sizes->devicetype][$devicewindowsol] = 1;
-                            }
+                }
+                report_deviceanalytics_create_scatter_chart(
+                    $chartids[3],
+                    $devicetypescreen,
+                    get_string('dashboard_chart_screen_sizes_title', 'report_deviceanalytics')
+                );
+                // WINDOW SIZES
+                $windowdata = array_filter($chartdata, 'report_device_analytics_is_not_null');
+                $devicetypewindow = array();
+                foreach ($windowdata as $sizes) {
+                    $devicetype2 = $sizes->devicetype;
+                    $devicewindowsol = $sizes->devicewindowsizex."x".$sizes->devicewindowsizey;
+                    if (array_key_exists($devicetype2, $devicetypewindow)) {
+                        if (array_key_exists($devicewindowsol, $devicetypewindow[$sizes->devicetype])) {
+                            $devicetypewindow[$sizes->devicetype][$devicewindowsol]++;
+                        } else {
+                            $devicetypewindow[$sizes->devicetype][$devicewindowsol] = 1;
                         }
-                        else {
-                            $devicetypewindow[$sizes->devicetype] = array();
-                            $devicetypewindow[$sizes->devicetype][$sizes->devicewindowsizex."x".$sizes->devicewindowsizey] = 1;                        
-                        }
+                    } else {
+                        $devicetypewindow[$sizes->devicetype] = array();
+                        $devicetypewindow[$sizes->devicetype][$sizes->devicewindowsizex."x".$sizes->devicewindowsizey] = 1;
                     }
-                    report_deviceanalytics_create_scatter_chart(
-                        $chartids[4], 
-                        $devicetypewindow, 
-                        get_string('dashboard_chart_window_sizes_title', 'report_deviceanalytics')
-                    );
-                ?>
-            });
+                }
+                report_deviceanalytics_create_scatter_chart(
+                    $chartids[4],
+                    $devicetypewindow,
+                    get_string('dashboard_chart_window_sizes_title', 'report_deviceanalytics')
+                );
+            ?>
         });
-    </script>
+    });
+</script>
 <?php }
-
-function report_deviceanalytics_create_scatter_chart($containerid, $datavalues, $title){ ?>
+function report_deviceanalytics_create_scatter_chart($containerid, $datavalues, $title) {
+?>
      $('#<?php echo $containerid; ?>').highcharts({
         chart: {
             type: 'scatter',
@@ -227,28 +221,29 @@ function report_deviceanalytics_create_scatter_chart($containerid, $datavalues, 
         },
         series: [
         <?php
-            foreach ($datavalues as $key => $value) {
-                echo '{';
-                    echo "name: '".$key."',";
-                    echo "data: [";
-                        foreach ($value as $size => $count) {
-                            echo "{";
-                                $parts = explode("x", $size);
-                                echo "x: " .$parts[0]." ,";
-                                echo "y: " .$parts[1]." ,";
-                                echo "value: " .$count;
-                            echo "},";
-                        }
-                    echo "]";
-                echo '},';
+        foreach ($datavalues as $key => $value) {
+            echo '{';
+            echo "name: '".$key."',";
+            echo "data: [";
+            foreach ($value as $size => $count) {
+                echo "{";
+                $parts = explode("x", $size);
+                echo "x: " .$parts[0]." ,";
+                echo "y: " .$parts[1]." ,";
+                echo "value: " .$count;
+                echo "},";
             }
+            echo "]";
+            echo '},';
+        }
         ?>
        ]
     });
 <?php
 }
 
-function report_deviceanalytics_create_pie_chart($containerid, $datavalues, $title){ ?>
+function report_deviceanalytics_create_pie_chart($containerid, $datavalues, $title) {
+?>
     $('#<?php echo $containerid; ?>').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -280,61 +275,61 @@ function report_deviceanalytics_create_pie_chart($containerid, $datavalues, $tit
             colorByPoint: true,
             data: [
             <?php
-                foreach ($datavalues as $dkey => $dvalue) {
-                    echo '{';
-                        echo "name: '".$dkey."',";
-                        echo "y: ".$dvalue;
-                    echo '},';
-                }
+            foreach ($datavalues as $dkey => $dvalue) {
+                echo '{';
+                echo "name: '".$dkey."',";
+                echo "y: ".$dvalue;
+                echo '},';
+            }
             ?>
             ]
         }]
     });
-<?php 
+<?php
 }
 
-function report_deviceanalytics_create_pie_chart_subversion($containerid ,$datavalues, $title){ ?>
+function report_deviceanalytics_create_pie_chart_subversion($containerid, $datavalues, $title) {
+?>
 $(function () {
     var colors = Highcharts.getOptions().colors,
         <?php
             $colorcounter = 0;
             echo 'categories = [';
-                $broout = "";
-                foreach ($datavalues as $key => $value) {
-                    $broout .= "'".$key."',";
-                }
-                $broout = rtrim($broout, ",");
-                echo $broout;
+            $broout = "";
+        foreach ($datavalues as $key => $value) {
+            $broout .= "'".$key."',";
+        }
+            $broout = rtrim($broout, ",");
+            echo $broout;
             echo '],';
             echo 'data = [';
-                foreach ($datavalues as $key => $val) {
-                    echo '{';
-                        echo 'y: '. report_device_analytics_calc_numbers_of_version($val). ',';
-                        echo 'color: colors['.$colorcounter.'],';
-                        
-                        echo 'drilldown: {';
-                            echo "name: '".$key." versions',";
-                            echo "categories: [";
-                                $catout = "";
-                                foreach ($val as $subkey => $count) {
-                                    $catout .= "'".$key." " .$subkey."',";
-                                }
-                                $catout = rtrim($catout, ",");
-                                echo $catout;
-                            echo "],";
-                            echo "data: [";
-                                $countout = "";
-                                foreach ($val as $subkey => $count) {
-                                    $countout .= $count.", ";
-                                }
-                                $countout = rtrim($countout, ",");
-                                echo $countout;
-                            echo "],";
-                            echo 'color: colors['.$colorcounter.']';
-                        echo '}, ';
-                    echo '},';
-                    $colorcounter++;
-                }
+        foreach ($datavalues as $key => $val) {
+                echo '{';
+                echo 'y: '. report_device_analytics_calc_numbers_of_version($val). ',';
+                echo 'color: colors['.$colorcounter.'],';
+                echo 'drilldown: {';
+                echo "name: '".$key." versions',";
+                echo "categories: [";
+                $catout = "";
+            foreach ($val as $subkey => $count) {
+                $catout .= "'".$key." " .$subkey."',";
+            }
+                $catout = rtrim($catout, ",");
+                echo $catout;
+                echo "],";
+                echo "data: [";
+                $countout = "";
+            foreach ($val as $subkey => $count) {
+                $countout .= $count.", ";
+            }
+                $countout = rtrim($countout, ",");
+                echo $countout;
+                echo "],";
+                echo 'color: colors['.$colorcounter.']';
+                echo '}, ';
+                echo '},';
+                $colorcounter++;
+        }
             echo '],';
         ?>
         browserData = [],
@@ -406,11 +401,11 @@ $(function () {
 <?php
 }
 
-function report_device_analytics_is_not_null ($var) { 
-    return !is_null($var->devicedisplaysizex); 
+function report_device_analytics_is_not_null($var) {
+    return !is_null($var->devicedisplaysizex);
 }
 
-function report_device_analytics_calc_numbers_of_version($datarray){
+function report_device_analytics_calc_numbers_of_version($datarray) {
     $returnnumber = 0;
     foreach ($datarray as $value) {
          $returnnumber += $value;
@@ -418,18 +413,18 @@ function report_device_analytics_calc_numbers_of_version($datarray){
     return $returnnumber;
 }
 
-function report_device_analytics_calc_percent($datarray, $calckey){
+function report_device_analytics_calc_percent($datarray, $calckey) {
     $groundvalue = 0;
     $procvalue = $datarray[$calckey];
     foreach ($datarray as $val) {
         $groundvalue += $val;
     }
-    return number_format((($procvalue/$groundvalue)*100),2);
+    return number_format((($procvalue / $groundvalue) * 100) , 2);
 }
 
-function report_deviceanalytics_create_chart_container($chartname, $headername){
+function report_deviceanalytics_create_chart_container($chartname, $headername) {
     global $OUTPUT;
     echo $OUTPUT->heading(get_string($headername, 'report_deviceanalytics'), 4);
-    echo $OUTPUT->container(NULL, 'chart', $chartname);
+    echo $OUTPUT->container(null, 'chart', $chartname);
     return $chartname;
 }

@@ -34,14 +34,14 @@ class deviceanalytics_data_storage{
         self::$instance = $this;
     }
 
-    public static function getInstance() {
+    public static function getinstance() {
         if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-    public function deviceanalytics_user_loggedin(){
+    public function deviceanalytics_user_loggedin() {
         global $USER;
         global $DB;
 
@@ -50,50 +50,49 @@ class deviceanalytics_data_storage{
             return 0;
         }
         if ($pluginsetting->adminlog == 0) {
-            if($this->getUserSystemRole($USER->id) == 'admin'){
+            if ($this->getusersystemrole($USER->id) == 'admin') {
                 return 0;
             }
         }
 
         // Standard Values
-        $currentDeviceData = new deviceanalytics_data_object();
+        $currentdevicedata = new deviceanalytics_data_object();
         if ($pluginsetting->anonymous == 0) {
-            $currentDeviceData->userid = $USER->id;
+            $currentdevicedata->userid = $USER->id;
         }
-        $currentDeviceData->userhash = deviceanalytics_data_object::get_identify_hash($_SESSION['USER']);
-        $alreadyexits = $DB->get_record_sql('SELECT * FROM {report_deviceanalytics_data} WHERE userhash = ?', array($currentDeviceData->userhash));
+        $currentdevicedata->userhash = deviceanalytics_data_object::get_identify_hash($_SESSION['USER']);
+        $alreadyexits = $DB->get_record_sql('SELECT * FROM {report_deviceanalytics_data} WHERE userhash = ?', array($currentdevicedata->userhash));
 
         if (!empty($alreadyexits) || is_null($alreadyexits)) {
-           return 0;
+            return 0;
         }
 
-        $currentDeviceData->userrole = $this->getUserSystemRole($USER->id);
-        $currentDeviceData->objectdate = time();
-        $currentDeviceData->activemoodlelang = $USER->lang;
+        $currentdevicedata->userrole = $this->getusersystemrole($USER->id);
+        $currentdevicedata->objectdate = time();
+        $currentdevicedata->activemoodlelang = $USER->lang;
 
         // Device Values
         $browscap = new Browscap(dirname(__FILE__).'/cache/');
         $browscap->doAutoUpdate = false;
         $info = $browscap->getBrowser();
 
-        $deviceType = $info->Device_Type;
-        $currentDeviceData->devicetype = $deviceType;
-        $currentDeviceData->devicebrand = $info->Parent;
-        $currentDeviceData->devicesystem = $info->Platform;
-        $currentDeviceData->devicebrowser = $info->Browser;
-        $currentDeviceData->devicebrowser_version = $info->Version;
-        $currentDeviceData->devicepointing_method = $info->Device_Pointing_Method;
+        $devicetype = $info->Device_Type;
+        $currentdevicedata->devicetype = $devicetype;
+        $currentdevicedata->devicebrand = $info->Parent;
+        $currentdevicedata->devicesystem = $info->Platform;
+        $currentdevicedata->devicebrowser = $info->Browser;
+        $currentdevicedata->devicebrowserversion = $info->Version;
+        $currentdevicedata->devicepointingmethod = $info->Device_Pointing_Method;
 
-        $insertid = $DB->insert_record('report_deviceanalytics_data', $currentDeviceData, true);
-           
+        $insertid = $DB->insert_record('report_deviceanalytics_data', $currentdevicedata, true);
         return $insertid;
     }
 
     public function report_deviceanalytics_update_screensize(
         $insertid,
-        $devicedisplaysizex, 
-        $devicedisplaysizey, 
-        $devicewindowsizex, 
+        $devicedisplaysizex,
+        $devicedisplaysizey,
+        $devicewindowsizex,
         $devicewindowsizey) {
         global $DB;
         $recordwithout = $DB->get_record('report_deviceanalytics_data', array('id' => $insertid), '*');
@@ -105,12 +104,11 @@ class deviceanalytics_data_storage{
         $DB->update_record('report_deviceanalytics_data', $recordwithout);
     }
 
-    private function getUserSystemRole($userid){
+    private function getusersystemrole($userid) {
         // TODO - more specific
         if (is_siteadmin($userid)) {
-           return "admin";
-        }
-        else {
+            return "admin";
+        } else {
             return "user";
         }
     }
