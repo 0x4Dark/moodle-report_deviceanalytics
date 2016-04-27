@@ -42,7 +42,7 @@ class deviceanalytics_data_object{
         }
         $this->httpacclang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
     }
-    public static function get_identify_hash($user_session){
+    public static function get_identify_hash($usersession){
         $usersession = $usersession->sesskey;
         $salt = sha1(md5($usersession));
         return $anonymoushash = md5($usersession.$salt);

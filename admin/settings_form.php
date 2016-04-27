@@ -36,7 +36,7 @@ class deviceanalytics_settings_form extends moodleform{
         $mform->setType('id', PARAM_RAW);
         $mform->addElement('selectyesno', 'status', get_string('settings_status', 'report_deviceanalytics'));
         $mform->addElement('selectyesno', 'anonymous', get_string('settings_anonymous', 'report_deviceanalytics'));
-        $mform->addElement('selectyesno', 'admin_log', get_string('settings_admin_log', 'report_deviceanalytics'));
+        $mform->addElement('selectyesno', 'adminlog', get_string('settings_admin_log', 'report_deviceanalytics'));
         $this->add_action_buttons();
     }
 }

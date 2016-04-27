@@ -29,10 +29,10 @@ require_once('lib.php');
 require_sesskey();
 
 $insertid = required_param('insertid', PARAM_INT);
-$device_displaysizex = required_param('device_display_size_x', PARAM_INT);
-$device_displaysizey = required_param('device_display_size_y', PARAM_INT);
-$device_windowsizex = required_param('device_window_size_x', PARAM_INT);
-$device_windowsizey = required_param('device_window_size_y', PARAM_INT);
+$devicedisplaysizex = required_param('device_display_size_x', PARAM_INT);
+$devicedisplaysizey = required_param('device_display_size_y', PARAM_INT);
+$devicewindowsizex = required_param('device_window_size_x', PARAM_INT);
+$devicewindowsizey = required_param('device_window_size_y', PARAM_INT);
 
 $datastorage = new deviceanalytics_data_storage();
 $datastorage->report_deviceanalytics_update_screensize(
