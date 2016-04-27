@@ -25,40 +25,28 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../lib.php');
+defined('MOODLE_INTERNAL') || die();
 
-$systemcontext = context_system::instance();
-require_login();
-require_capability('report/deviceanalytics:managesettings', $systemcontext);
-
-$pagename = 'report_deviceanalytics_settings';
-$PAGE->set_context($systemcontext);
-$PAGE->set_url('/report/deviceanalytics/admin/settings.php');
-$PAGE->set_pagelayout('admin');
-$PAGE->set_title(get_string('settings_title', 'report_deviceanalytics'));
-$PAGE->set_heading(get_string('settings_title', 'report_deviceanalytics'), 3);
-admin_externalpage_setup($pagename);
-
-$settings_form = new deviceanalytics_settings_form();
-
-if ($settings_form->is_cancelled()) {
-	echo $OUTPUT->header();
-		echo $OUTPUT->container(get_string('settings_cancelled', 'report_deviceanalytics'), 'important', 'notice');
-		echo $OUTPUT->continue_button(new moodle_url('/report/deviceanalytics/admin/settings.php', array()));
-	echo $OUTPUT->footer();
-	
-} else if ($fromform = $settings_form->get_data()) {
-	$DB->update_record('report_deviceanalytics', $fromform);
-	echo $OUTPUT->header();
-		echo $OUTPUT->container(get_string('settings_updated', 'report_deviceanalytics'), 'important', 'notice');
-		echo $OUTPUT->continue_button(new moodle_url('/report/deviceanalytics/admin/settings.php', array()));
-	echo $OUTPUT->footer();
-}else { 
-	global $time_format;
-	$db_data = $DB->get_record('report_deviceanalytics', array(), '*');
-	$settings_form->set_data($db_data);
-	echo $OUTPUT->header();
-		echo $OUTPUT->heading(get_string('settings_title', 'report_deviceanalytics'));
-		$settings_form->display();
-	echo $OUTPUT->footer();
+if (has_capability('report/deviceanalytics:managesettings', context_system::instance())) {
+    $ADMIN->add('reports',
+        new admin_category(
+            'report_deviceanalytics',
+            get_string('pluginname', 'report_deviceanalytics')
+        )
+    );
+    $ADMIN->add('report_deviceanalytics',
+        new admin_externalpage(
+            'report_deviceanalytics_dashboard',
+            get_string('dashboard_name', 'report_deviceanalytics'),
+            new moodle_url('/report/deviceanalytics/admin/dashboard.php')
+        )
+    );
+    $ADMIN->add('report_deviceanalytics',
+        new admin_externalpage(
+            'report_deviceanalytics_settings',
+            get_string('settings_name', 'report_deviceanalytics'),
+            new moodle_url('/report/deviceanalytics/admin/settings.php')
+        )
+    );
 }
+$settings = null;

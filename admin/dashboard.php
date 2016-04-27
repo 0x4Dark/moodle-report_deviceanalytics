@@ -43,20 +43,19 @@ $PAGE->set_cacheable(false);
 $PAGE->requires->js('/report/deviceanalytics/libs/jquery-1.12.2.min.js', true);
 $PAGE->requires->js('/report/deviceanalytics/libs/highcharts.js', true);
 
-$analytics_data = report_deviceanalytics_load_chart_datas();
+$analyticsdata = report_deviceanalytics_load_chart_datas();
 
-//OUTPUT THE CHARS
 echo $OUTPUT->header();
-	echo $OUTPUT->heading(get_string('dashboard_name', 'report_deviceanalytics'));
-	echo '<noscript>';
-		echo $OUTPUT->error_text(get_string('dashboard_nojs_error_message', 'report_deviceanalytics'));
-	echo '</noscript>';
-	if((is_null($analytics_data)) || (empty($analytics_data))){
-		echo $OUTPUT->error_text(get_string('dashboard_no_data_error', 'report_deviceanalytics'));
-	}else{
-		echo $OUTPUT->container_start(null, 'charts');
-			$chart_names = report_deviceanalytics_create_chart_containers();
-			report_deviceanalytics_create_chart_querys($analytics_data, $chart_names);
-		echo $OUTPUT->container_end();
-	}
+echo $OUTPUT->heading(get_string('dashboard_name', 'report_deviceanalytics'));
+echo '<noscript>';
+echo $OUTPUT->error_text(get_string('dashboard_nojs_error_message', 'report_deviceanalytics'));
+echo '</noscript>';
+if ((is_null($analyticsdata))||(empty($analyticsdata))) {
+    echo $OUTPUT->error_text(get_string('dashboard_no_data_error', 'report_deviceanalytics'));
+} else {
+    echo $OUTPUT->container_start(null, 'charts');
+    $chartnames = report_deviceanalytics_create_chart_containers();
+    report_deviceanalytics_create_chart_querys($analyticsdata, $chartnames);
+    echo $OUTPUT->container_end();
+}
 echo $OUTPUT->footer();

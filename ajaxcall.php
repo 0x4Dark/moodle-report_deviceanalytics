@@ -28,18 +28,17 @@
 require_once('lib.php');
 require_sesskey();
 
-$insert_id = required_param('insert_id', PARAM_INT);
-$device_display_size_x = required_param('device_display_size_x', PARAM_INT);
-$device_display_size_y = required_param('device_display_size_y', PARAM_INT);
-$device_window_size_x = required_param('device_window_size_x', PARAM_INT);
-$device_window_size_y = required_param('device_window_size_y', PARAM_INT);
+$insertid = required_param('insertid', PARAM_INT);
+$device_displaysizex = required_param('device_display_size_x', PARAM_INT);
+$device_displaysizey = required_param('device_display_size_y', PARAM_INT);
+$device_windowsizex = required_param('device_window_size_x', PARAM_INT);
+$device_windowsizey = required_param('device_window_size_y', PARAM_INT);
 
-echo $insert_id;
-$data_storage = new deviceanalytics_data_storage();
-$data_storage->report_deviceanalytics_update_screensize(
-	$insert_id,
-	$device_display_size_x, 
-	$device_display_size_y, 
-	$device_window_size_x, 
-	$device_window_size_y
+$datastorage = new deviceanalytics_data_storage();
+$datastorage->report_deviceanalytics_update_screensize(
+    $insertid,
+    $devicedisplaysizex, 
+    $devicedisplaysizey, 
+    $devicewindowsizex, 
+    $devicewindowsizey
 );

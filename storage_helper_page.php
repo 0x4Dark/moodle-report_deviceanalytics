@@ -26,7 +26,7 @@
  */
 
 require_once('lib.php');
-ini_set('memory_limit','1024M');
+ini_set('memory_limit' , '1024M');
 require_login();
 if ((isset($_SERVER['HTTPS'])) and ('on' == $_SERVER['HTTPS'])) {
     $CFG->httpswwwroot = 'https://'.$_SERVER['HTTP_HOST'];
@@ -40,8 +40,8 @@ $PAGE->set_pagelayout('redirect');
 $PAGE->requires->css('/report/deviceanalytics/css/storage_helper_page_css.css');
 $PAGE->requires->js('/report/deviceanalytics/libs/jquery-1.12.2.min.js', true);
 
-$data_storage = new deviceanalytics_data_storage();
-$insert_id = $data_storage->deviceanalytics_user_loggedin();
+$datastorage = new deviceanalytics_data_storage();
+$insertid = $datastorage->deviceanalytics_user_loggedin();
 $CFG->additionalhtmlhead .= '<noscript>
 <meta http-equiv="refresh" content="0;url='.$CFG->wwwroot.'">
 </noscript>';
@@ -49,26 +49,26 @@ echo $OUTPUT->header();
 ?>
 <script type="text/javascript">
     $( document ).ready(function() {
-    	if(<?php echo $insert_id;?> == 0){
-    		window.location.replace("<?php echo $CFG->wwwroot; ?>");
-    	}else{
-    		var ajaxurl = 'ajaxcall.php?' + 'sesskey=' + M.cfg.sesskey + '&insert_id=' + <?php echo $insert_id; ?>;
-    		var screensize = {
-    			'device_display_size_x': screen.width, 
-    			'device_display_size_y': screen.height, 
-    			'device_window_size_x': $(window).width(), 
-    			'device_window_size_y': $(window).height()
-    		}
-    		$.ajax({
-	    		type: "GET",
-	  			url: ajaxurl,
-	  			data: screensize,
-			}).done(function(html) {
-	  			console.log(html);
-	  			window.location.replace("<?php echo $CFG->wwwroot; ?>");
-			});
-    	}
-	});
+        if(<?php echo $insertid;?> == 0){
+            window.location.replace("<?php echo $CFG->wwwroot; ?>");
+        }else{
+            var ajaxurl = 'ajaxcall.php?' + 'sesskey=' + M.cfg.sesskey + '&insertid=' + <?php echo $insertid; ?>;
+            var screensize = {
+                'device_display_size_x': screen.width, 
+                'device_display_size_y': screen.height, 
+                'device_window_size_x': $(window).width(), 
+                'device_window_size_y': $(window).height()
+            }
+            $.ajax({
+                type: "GET",
+                url: ajaxurl,
+                data: screensize,
+            }).done(function(html) {
+                console.log(html);
+                window.location.replace("<?php echo $CFG->wwwroot; ?>");
+            });
+        }
+    });
 </script>
 <?php
 echo $OUTPUT->footer();

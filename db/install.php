@@ -26,14 +26,13 @@
  */
 
 function xmldb_report_deviceanalytics_install() {
-	/*INSERT STANDARD CONFIG*/
-	global $DB;
-	$install_record = new stdClass();
-	$install_record->starttime = time();
-	$install_record->status = 1;
-	$install_record->anonymous = 0;
-	$install_record->admin_log = 0;
-	$DB->insert_record('report_deviceanalytics', $install_record);
+    global $DB;
+    $installrecord = new stdClass();
+    $installrecord->starttime = time();
+    $installrecord->status = 1;
+    $installrecord->anonymous = 0;
+    $installrecord->adminlog = 0;
+    $DB->insert_record('report_deviceanalytics', $installrecord);
 }
 
 function xmldb_report_deviceanalytics_install_recovery() {

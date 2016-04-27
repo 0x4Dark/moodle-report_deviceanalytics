@@ -10,7 +10,7 @@
         <FIELD NAME="starttime" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="time that the tracking starts"/>
         <FIELD NAME="status" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="is the device analytics running"/>
         <FIELD NAME="anonymous" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="If the user data will be stored anonymously"/>
-        <FIELD NAME="admin_log" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="if the admins will include inside the data"/>
+        <FIELD NAME="adminlog" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="if the admins will include inside the data"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -19,23 +19,23 @@
     <TABLE NAME="report_deviceanalytics_data" COMMENT="data for the table">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="user_hash" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="user_role" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="object_date" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="active_moodle_lang" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_type" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="device_system" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_browser" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_browser_version" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_display_size_x" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_display_size_y" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_window_size_x" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_window_size_y" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="device_pointing_method" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="http_user_ag" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="http_ssl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="http_acc_lang" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="userhash" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userrole" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="objectdate" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="activemoodle_lang" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicetype" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="devicesystem" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicebrowser" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicebrowserversion" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicedisplaysizex" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicedisplaysizey" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicewindowsizex" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicewindowsizey" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="devicepointingmethod" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="httpuserag" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="httpssl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="httpacclang" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

@@ -26,11 +26,11 @@
  */
 
 class deviceanalytics_settings_form extends moodleform{
-	public function definition() {
+    public function definition() {
         global $CFG;
         $mform = $this->_form;
-        $start_attr=array('readonly'=>'readonly');
-        $mform->addElement('text', 'starttime', get_string('settings_starttime', 'report_deviceanalytics'), $start_attr);
+        $startattr = array('readonly' => 'readonly');
+        $mform->addElement('text', 'starttime', get_string('settings_starttime', 'report_deviceanalytics'), $startattr);
         $mform->setType('starttime', PARAM_RAW);
         $mform->addElement('hidden', 'id', '1');
         $mform->setType('id', PARAM_RAW);

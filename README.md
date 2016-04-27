@@ -1,2 +1,2 @@
-# moodle-tool_deviceanalytics
+# moodle-report_deviceanalytics
 Analytics Plugin for user devices

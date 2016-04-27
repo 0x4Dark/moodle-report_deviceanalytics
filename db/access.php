@@ -38,7 +38,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/site:config'
     ),
     'report/deviceanalytics:viewdashboard' => array(
-    	'riskbitmask' => RISK_PERSONAL,
+        'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
