@@ -14,15 +14,23 @@ Dashboard under: Site administration > Reports > Device Analytics > Dashboard
 
 ### Version
 Current version: **2016042701** 
+
 moodle requires: **2014111000** 
+
 moodle versions: 2.8, 2.9 
+
 will be installed into /report/deviceanalytics
 
 ### Credits
 For HTTP Header interpreting this plugin is using: 
-http://browscap.org/ - Version: 2.1.1 
+
+http://browscap.org/ - Version: 2.1.1
+
 Browser Capabilities Project LICENSE 
 
+
 and for Dashboard-Charts: 
-http://www.highcharts.com/ - Version: 4.2.3 
+
+http://www.highcharts.com/ - Version: 4.2.3
+
 Non-Commercial LICENSE
