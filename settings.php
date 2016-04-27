@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Defines the version and other meta-info about the plugin
  *
@@ -24,29 +23,27 @@
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
-
 if (has_capability('report/deviceanalytics:managesettings', context_system::instance())) {
-	$ADMIN->add('reports',
-   		new admin_category(
-            'report_deviceanalytics', 
+    $ADMIN->add('reports',
+        new admin_category(
+            'report_deviceanalytics',
             get_string('pluginname', 'report_deviceanalytics')
-       	)
+        )
     );
-	$ADMIN->add('report_deviceanalytics', 
-		new admin_externalpage(
-			'report_deviceanalytics_dashboard', 
-			get_string('dashboard_name', 'report_deviceanalytics'), 
-			new moodle_url('/report/deviceanalytics/admin/dashboard.php')
-		)
-	);
-    $ADMIN->add('report_deviceanalytics', 
-    	new admin_externalpage(
-    		'report_deviceanalytics_settings', 
-    		get_string('settings_name', 'report_deviceanalytics'), 
-    		new moodle_url('/report/deviceanalytics/admin/settings.php')
-    	)
+    $ADMIN->add('report_deviceanalytics',
+        new admin_externalpage(
+            'report_deviceanalytics_dashboard',
+            get_string('dashboard_name', 'report_deviceanalytics'),
+            new moodle_url('/report/deviceanalytics/admin/dashboard.php')
+        )
+    );
+    $ADMIN->add('report_deviceanalytics',
+        new admin_externalpage(
+            'report_deviceanalytics_settings',
+            get_string('settings_name', 'report_deviceanalytics'),
+            new moodle_url('/report/deviceanalytics/admin/settings.php')
+        )
     );
 }
 $settings = null;

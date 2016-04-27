@@ -65,7 +65,7 @@ echo $OUTPUT->header();
                 data: screensize,
             }).done(function(html) {
                 console.log(html);
-                window.location.replace("<?php echo $CFG->wwwroot; ?>");
+                //window.location.replace("<?php echo $CFG->wwwroot; ?>");
             });
         }
     });
