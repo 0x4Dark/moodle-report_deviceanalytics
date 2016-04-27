@@ -44,6 +44,7 @@ class deviceanalytics_data_storage{
     public function deviceanalytics_user_loggedin() {
         global $USER;
         global $DB;
+        global $CFG;
 
         $pluginsetting = $DB->get_record('report_deviceanalytics', array(), '*');
         if ($pluginsetting->status == 0) {
@@ -72,7 +73,7 @@ class deviceanalytics_data_storage{
         $currentdevicedata->activemoodlelang = $USER->lang;
 
         // Device Values
-        $browscap = new Browscap(dirname(__FILE__).'/cache/');
+        $browscap = new Browscap($CFG->dataroot.'/cache/');
         $browscap->doAutoUpdate = false;
         $info = $browscap->getBrowser();
 
