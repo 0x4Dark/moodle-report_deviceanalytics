@@ -106,7 +106,6 @@ class deviceanalytics_data_storage{
     }
 
     private function getusersystemrole($userid) {
-        // TODO - more specific
         if (is_siteadmin($userid)) {
             return "admin";
         } else {

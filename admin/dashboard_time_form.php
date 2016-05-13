@@ -25,6 +25,15 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function xmldb_report_deviceanalytics_uninstall() {
-    return true;
+class deviceanalytics_dashboard_time_form extends moodleform{
+    public function definition() {
+        global $CFG, $DB;
+        $conf = $DB->get_record('report_deviceanalytics', array());
+        $mform = $this->_form;
+        $mform->addElement('date_selector', 'timestart', get_string('from'));
+ 		$mform->addElement('date_selector', 'timefinish', get_string('to'));
+ 		$mform->setDefault('timestart', $conf->starttime);
+ 		$mform->setDefault('timefinish', time());
+		$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
+    }
 }

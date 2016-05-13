@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
+ * Provides code to be executed during the installation
  *
- * Setting the $plugin->version to 0 prevents the plugin from being installed.
- * See https://docs.moodle.org/dev/version.php for more info.
- *
- * @package    tool_deviceanalytics
+ * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Inserting the current time into the config tale
+ */
 function xmldb_report_deviceanalytics_install() {
     global $DB;
     $installrecord = new stdClass();
@@ -35,5 +35,8 @@ function xmldb_report_deviceanalytics_install() {
     $DB->insert_record('report_deviceanalytics', $installrecord);
 }
 
+/**
+ * Nothing yet
+ */
 function xmldb_report_deviceanalytics_install_recovery() {
 }

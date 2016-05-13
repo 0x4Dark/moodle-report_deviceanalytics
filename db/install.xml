@@ -23,7 +23,7 @@
         <FIELD NAME="userhash" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="userrole" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="objectdate" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="activemoodle_lang" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="activemoodlelang" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="devicetype" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="devicesystem" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="devicebrowser" TYPE="text" NOTNULL="false" SEQUENCE="false"/>

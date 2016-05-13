@@ -15,10 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
- *
- * Setting the $plugin->version to 0 prevents the plugin from being installed.
- * See https://docs.moodle.org/dev/version.php for more info.
+ * Library of interface functions includes and constants 
  *
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
@@ -43,7 +40,6 @@ $timeformat = 'd-m-Y G:i:s';
 $dbtables = array();
 $dbtables['deviceanalytics'] = 'report_deviceanalytics';
 $dbtables['deviceanalytics_data'] = 'report_deviceanalytics_data';
-$dbtables['deviceanalytics_settings'] = 'report_deviceanalytics_settings';
 
 /*EXTERN LIBS*/
 require_once('libs/Browscap.php');
@@ -51,6 +47,7 @@ require_once('libs/Browscap.php');
 /*INCLUDES*/
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/formslib.php');
+require_once('admin/dashboard_time_form.php');
 require_once('admin/settings_form.php');
 
 require_once('redirector.php');

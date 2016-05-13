@@ -15,10 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
- *
- * Setting the $plugin->version to 0 prevents the plugin from being installed.
- * See https://docs.moodle.org/dev/version.php for more info.
+ * german strings for report_deviceanalytics
  *
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
@@ -33,8 +30,8 @@ $string['pluginname'] = 'Geräte Analytik';
 $string['dashboard_name'] = 'Übersicht';
 $string['dashboard_nojs_error_message'] = 'Die Übersicht Grafiken funktionieren nur, wenn Javascript aktiviert ist';
 $string['dashboard_title'] = $string['pluginname'].' Übersicht';
-$string['dashboard_chart_device_types'] = 'Geräte Typen';
-$string['dashboard_chart_device_types_title'] = 'Verteilung von Geräte Typen';
+$string['dashboard_chart_device_types'] = 'Gerätetypen';
+$string['dashboard_chart_device_types_title'] = 'Verteilung von Gerätetypen';
 $string['dashboard_chart_device_systems'] = 'Betriebssysteme';
 $string['dashboard_chart_device_systems_title'] = 'Geräte Betriebssysteme';
 $string['dashboard_chart_device_browser'] = 'Browser';
@@ -46,6 +43,15 @@ $string['dashboard_chart_window_sizes'] = 'Fenstergröße';
 $string['dashboard_chart_window_sizes_title'] = 'meist genutzte Fenstergröße';
 $string['dashboard_chart_pointing_method'] = 'Eingabemethode';
 $string['dashboard_chart_pointing_method_title'] = 'Geräte Interaktionsmethode';
+
+// TABLE HEADERS
+$string['table_type'] = "Typ";
+$string['table_os'] = "Betriebssystem";
+$string['table_browser'] = "Browser";
+$string['table_pointing'] = "Eingabemethode";
+$string['table_count'] = "Anzahl";
+$string['table_percent'] = "Prozent";
+$string['table_version'] = "Version";
 // SETTINGS
 $string['settings_name'] = 'Einstellungen';
 $string['settings_title'] = $string['pluginname'].' Einstellungen';

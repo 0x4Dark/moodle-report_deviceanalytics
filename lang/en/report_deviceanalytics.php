@@ -15,10 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
- *
- * Setting the $plugin->version to 0 prevents the plugin from being installed.
- * See https://docs.moodle.org/dev/version.php for more info.
+ * english strings for report_deviceanalytics
  *
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
@@ -49,6 +46,14 @@ $string['dashboard_chart_window_sizes_title'] = 'most common user window solutio
 $string['dashboard_chart_window_sizes_subtitle'] = 'seperated by devices';
 $string['dashboard_chart_pointing_method'] = 'Device Pointing Methode';
 $string['dashboard_chart_pointing_method_title'] = 'device interactive input methode';
+// TABLE HEADERS
+$string['table_type'] = "Type";
+$string['table_os'] = "Operating System";
+$string['table_browser'] = "Browser";
+$string['table_pointing'] = "Pointing Methode";
+$string['table_count'] = "Count";
+$string['table_percent'] = "Percent";
+$string['table_version'] = "Version";
 // SETTINGS
 $string['settings_name'] = 'Settings';
 $string['settings_title'] = $string['pluginname'].' Settings';
