@@ -233,7 +233,7 @@ function report_deviceanalytics_create_data_tables($datas) {
     }
     foreach ($devicebrowser as $bname => $sub) {
         $returntables[2]->data[] = array(
-            '<b>'.report_device_analytics_calc_percent_from_sub($devicebrowser, $bname).'</b>',
+            '<b>'.$bname.'</b>',
             report_device_analytics_calc_percent_from_sub($devicebrowser, $bname).'%',
             report_device_analytics_calc_numbers_of_version($sub)
         );
