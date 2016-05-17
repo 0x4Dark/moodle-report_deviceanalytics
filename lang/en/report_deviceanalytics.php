@@ -24,9 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// GLOBAL
 $string['pluginname'] = 'Device Analytics';
-// DASHBOARD
 $string['dashboard_name'] = 'Dashboard';
 $string['dashboard_no_data_error'] = 'No analytics data exists';
 $string['dashboard_nojs_error_message'] = 'Dashboard Charts only works if Javascript is enabled';
@@ -46,7 +44,7 @@ $string['dashboard_chart_window_sizes_title'] = 'most common user window solutio
 $string['dashboard_chart_window_sizes_subtitle'] = 'seperated by devices';
 $string['dashboard_chart_pointing_method'] = 'Device Pointing Methode';
 $string['dashboard_chart_pointing_method_title'] = 'device interactive input methode';
-// TABLE HEADERS
+$string['dashboard_time_title'] = 'Timerange';
 $string['table_type'] = "Type";
 $string['table_os'] = "Operating System";
 $string['table_browser'] = "Browser";
@@ -54,7 +52,6 @@ $string['table_pointing'] = "Pointing Methode";
 $string['table_count'] = "Count";
 $string['table_percent'] = "Percent";
 $string['table_version'] = "Version";
-// SETTINGS
 $string['settings_name'] = 'Settings';
 $string['settings_title'] = $string['pluginname'].' Settings';
 $string['settings_starttime'] = 'Starttime';

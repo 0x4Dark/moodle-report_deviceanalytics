@@ -50,7 +50,7 @@ if ($fromform = $timeform->get_data()) {
     $timeform->set_data($fromform);
     $analyticsdata = report_deviceanalytics_load_datas($fromform->timestart, $fromform->timefinish);
 } else {
-	$analyticsdata = report_deviceanalytics_load_datas();
+    $analyticsdata = report_deviceanalytics_load_datas();
 }
 
 $PAGE->requires->js_function_call('createCharts', array($analyticsdata), true);
@@ -63,7 +63,8 @@ echo '</noscript>';
 if ((is_null($analyticsdata))||(empty($analyticsdata))) {
     echo $OUTPUT->error_text(get_string('dashboard_no_data_error', 'report_deviceanalytics'));
 } else {
-	$timeform->display();
+    echo $OUTPUT->heading(get_string('dashboard_time_title', 'report_deviceanalytics'), 4);
+    $timeform->display();
     echo $OUTPUT->container_start(null, 'datas');
     $vtables = report_deviceanalytics_create_data_tables($analyticsdata);
     $chartout = report_deviceanalytics_create_charts();

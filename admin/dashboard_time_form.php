@@ -15,25 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
- *
- * Setting the $plugin->version to 0 prevents the plugin from being installed.
- * See https://docs.moodle.org/dev/version.php for more info.
+ * Form File for dashboard.php
+ * @see dashboard.php
  *
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * MoodleForm for dashboard timerange
+ * @package    report_deviceanalytics
+ * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class deviceanalytics_dashboard_time_form extends moodleform{
+    /**
+     * Defines Form elements
+     */
     public function definition() {
         global $CFG, $DB;
         $conf = $DB->get_record('report_deviceanalytics', array());
         $mform = $this->_form;
         $mform->addElement('date_selector', 'timestart', get_string('from'));
- 		$mform->addElement('date_selector', 'timefinish', get_string('to'));
- 		$mform->setDefault('timestart', $conf->starttime);
- 		$mform->setDefault('timefinish', time());
-		$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
+        $mform->addElement('date_selector', 'timefinish', get_string('to'));
+        $mform->setDefault('timestart', $conf->starttime);
+        $mform->setDefault('timefinish', time());
+        $mform->addElement('submit', 'submitbutton', get_string('savechanges'));
     }
 }

@@ -24,10 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// GLOBAL
 $string['pluginname'] = 'Geräte Analytik';
-// DASHBOARD
 $string['dashboard_name'] = 'Übersicht';
+$string['dashboard_no_data_error'] = 'Es existieren noch keine Daten';
 $string['dashboard_nojs_error_message'] = 'Die Übersicht Grafiken funktionieren nur, wenn Javascript aktiviert ist';
 $string['dashboard_title'] = $string['pluginname'].' Übersicht';
 $string['dashboard_chart_device_types'] = 'Gerätetypen';
@@ -43,8 +42,7 @@ $string['dashboard_chart_window_sizes'] = 'Fenstergröße';
 $string['dashboard_chart_window_sizes_title'] = 'meist genutzte Fenstergröße';
 $string['dashboard_chart_pointing_method'] = 'Eingabemethode';
 $string['dashboard_chart_pointing_method_title'] = 'Geräte Interaktionsmethode';
-
-// TABLE HEADERS
+$string['dashboard_time_title'] = 'Zeitbereich';
 $string['table_type'] = "Typ";
 $string['table_os'] = "Betriebssystem";
 $string['table_browser'] = "Browser";
@@ -52,7 +50,6 @@ $string['table_pointing'] = "Eingabemethode";
 $string['table_count'] = "Anzahl";
 $string['table_percent'] = "Prozent";
 $string['table_version'] = "Version";
-// SETTINGS
 $string['settings_name'] = 'Einstellungen';
 $string['settings_title'] = $string['pluginname'].' Einstellungen';
 $string['settings_starttime'] = 'Startzeit';

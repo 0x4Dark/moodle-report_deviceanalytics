@@ -21,6 +21,14 @@
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+/**
+ * redirect class
+ *
+ * @package    report_deviceanalytics
+ * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class deviceanalytics_redirector{
     /**
      * init function is directly called from events.php

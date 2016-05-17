@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * File for deviceanalytics_data_object class
+ *
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -22,7 +24,7 @@
 
 /**
  * Class which holds all saveable data
-  *
+ *
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -30,87 +32,87 @@
 class deviceanalytics_data_object{
 
     /**
-     * @var ID of the user $userid
+     * @var int $userid ID of the user
      */
     public $userid;
 
     /**
-     * @var "userrole" check if is admin $userrole
+     * @var String $userrole "userrole" check if is admin
      */
     public $userrole;
 
     /**
-     * @var currenttime in timestamp $objectdata
+     * @var int $objectdata currenttime in timestamp
      */
     public $objectdate;
 
     /**
-     * @var user used moodlelang $activemoodlelang
+     * @var String $activemoodlelang user used moodlelang
      */
     public $activemoodlelang;
 
     /**
-     * @var created hash $userhash
+     * @var String $userhash created hash
      */
     public $userhash;
 
     /**
-     * @var type of device $devicetype
+     * @var String $devicetype type of device
      */
     public $devicetype;
 
     /**
-     * @var operating system $devicesystem
+     * @var String $devicesystem operating system
      */
     public $devicesystem;
 
     /**
-     * @var current used browser $devicebrowser
+     * @var String $devicebrowser current used browser
      */
     public $devicebrowser;
 
     /**
-     * @var version of used browser $devicebrowserversion
+     * @var float $devicebrowserversion version of used browser
      */
     public $devicebrowserversion;
 
     /**
-     * @var width of devicescreen $devicedisplaysizex
+     * @var int $devicedisplaysizex width of devicescreen in px
      */
     public $devicedisplaysizex;
 
     /**
-     * @var height of devicescreen $devicedisplaysizey
+     * @var int $devicedisplaysizey height of devicescreen in px
      */
     public $devicedisplaysizey;
 
     /**
-     * @var width of browser $devicewindowsizex
+     * @var int $devicewindowsizex width of browser in px
      */
     public $devicewindowsizex;
 
     /**
-     * @var height of browser $devicewindowsizey
+     * @var int $devicewindowsizey height of browser in px
      */
     public $devicewindowsizey;
 
     /**
-     * @var interation method $devicepointingmethod
+     * @var String $devicepointingmethod interation method
      */
     public $devicepointingmethod;
 
     /**
-     * @var http user agent $httpuserag
+     * @var String $httpuserag http user agent
      */
     public $httpuserag;
 
     /**
-     * @var is ssl used $httpssl
+     * @var String $httpssl is ssl used
      */
     public $httpssl;
 
     /**
-     * @var http active lang $httpacclang
+     * @var String $httpacclang http active lang
      */
     public $httpacclang;
 

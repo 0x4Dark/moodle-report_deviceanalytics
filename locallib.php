@@ -28,6 +28,12 @@ require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once('admin/dashboard_time_form.php');
 
+/**
+ * Loads the saved data from report_deviceanalytics_data
+ * @param int $starttime filters entries with starttime
+ * @param int $endtime filters entries with endtime
+ * @return Array $chartsdata of records or null
+ */
 function report_deviceanalytics_load_datas($starttime = null, $endtime = null) {
     global $DB;
 
@@ -38,7 +44,8 @@ function report_deviceanalytics_load_datas($starttime = null, $endtime = null) {
     if (empty($endtime) || is_null($endtime)) {
         $endtime = time();
     }
-    $chartsdata = $DB->get_records_sql('SELECT * FROM {report_deviceanalytics_data} WHERE objectdate >= ? AND objectdate <= ?', array($starttime, $endtime));
+    $chartsdata = $DB->get_records_sql('SELECT * FROM {report_deviceanalytics_data} WHERE objectdate >= ? AND objectdate <= ?',
+        array($starttime, $endtime));
     if (! empty($chartsdata) || ! is_null($chartsdata)) {
         return $chartsdata;
     } else {
@@ -46,21 +53,64 @@ function report_deviceanalytics_load_datas($starttime = null, $endtime = null) {
     }
 }
 
+/**
+ * Creates the Outputcontainer for dashboard.php
+ * @param Array $chartout array of containers
+ * @param Array $vtables array of html_tables
+ * @return String all containers for output
+ */
 function report_deviceanalytics_create_containers($chartout, $vtables) {
     $vout = array();
-    $vout[] = report_deviceanaltics_create_wrapper_container('device_types', 'dashboard_chart_device_types', $chartout[0], $vtables[0]);
-    $vout[] = report_deviceanaltics_create_wrapper_container('device_systems', 'dashboard_chart_device_systems', $chartout[1], $vtables[1]);
-    $vout[] = report_deviceanaltics_create_wrapper_container('device_browser', 'dashboard_chart_device_browser', $chartout[2], $vtables[2]);
-    $vout[] = report_deviceanaltics_create_wrapper_container('screen_sizes', 'dashboard_chart_screen_sizes', $chartout[3], $vtables[3]);
-    $vout[] = report_deviceanaltics_create_wrapper_container('window_sizes', 'dashboard_chart_window_sizes', $chartout[4], $vtables[4]);
-    $vout[] = report_deviceanaltics_create_wrapper_container('pointing_method', 'dashboard_chart_pointing_method', $chartout[5], $vtables[5]);
+    $vout[] = report_deviceanaltics_create_wrapper_container(
+        'device_types',
+        'dashboard_chart_device_types',
+        $chartout[0],
+        $vtables[0]);
+    $vout[] = report_deviceanaltics_create_wrapper_container(
+        'device_systems',
+        'dashboard_chart_device_systems',
+        $chartout[1],
+        $vtables[1]);
+    $vout[] = report_deviceanaltics_create_wrapper_container(
+        'device_browser',
+        'dashboard_chart_device_browser',
+        $chartout[2],
+        $vtables[2]);
+    $vout[] = report_deviceanaltics_create_wrapper_container(
+        'screen_sizes',
+        'dashboard_chart_screen_sizes',
+        $chartout[3],
+        $vtables[3]);
+    $vout[] = report_deviceanaltics_create_wrapper_container(
+        'window_sizes',
+        'dashboard_chart_window_sizes',
+        $chartout[4],
+        $vtables[4]);
+    $vout[] = report_deviceanaltics_create_wrapper_container(
+        'pointing_method',
+        'dashboard_chart_pointing_method',
+        $chartout[5],
+        $vtables[5]);
     return $vout;
 }
 
+
+/**
+ * Check if object holds screen data
+ * @param Object $var entryobject
+ * @return bool true/false
+ * @deprecated
+ */
 function report_device_analytics_is_not_null($var) {
     return !is_null($var->devicedisplaysizex);
 }
 
+
+/**
+ * Calculate the number of subversion inside array
+ * @param Array $datarray array ob records
+ * @return int count of subversion
+ */
 function report_device_analytics_calc_numbers_of_version($datarray) {
     $returnnumber = 0;
     foreach ($datarray as $value) {
@@ -69,6 +119,12 @@ function report_device_analytics_calc_numbers_of_version($datarray) {
     return $returnnumber;
 }
 
+/**
+ * Calculate the percent for element inside array
+ * @param Array $datarray array with prechecked elements
+ * @param String $calckey calc elementkey
+ * @return float percent of searched value
+ */
 function report_device_analytics_calc_percent($datarray, $calckey) {
     $groundvalue = 0;
     $procvalue = $datarray[$calckey];
@@ -78,7 +134,13 @@ function report_device_analytics_calc_percent($datarray, $calckey) {
     return number_format((($procvalue / $groundvalue) * 100) , 2);
 }
 
-function report_device_analytics_calc_percent_from_sub($datarray, $calckey){
+/**
+ * Same as report_device_analytics_calc_percent, but from subarray
+ * @param Array $datarray array with prechecked elements
+ * @param String $calckey calc elementkey
+ * @return float percent of searched value
+ */
+function report_device_analytics_calc_percent_from_sub($datarray, $calckey) {
     $groundvalue = 0;
     $procsub = array();
     foreach ($datarray as $key => $subvalue) {
@@ -86,13 +148,21 @@ function report_device_analytics_calc_percent_from_sub($datarray, $calckey){
         foreach ($subvalue as $value) {
             $subval += $value;
         }
-        $procsub[$key] =  $subval;
+        $procsub[$key] = $subval;
         $groundvalue += $subval;
     }
     return number_format((($procsub[$calckey] / $groundvalue) * 100) , 2);
 }
 
-function report_deviceanaltics_create_wrapper_container($wrappername, $headername, $chartoutput, $vtables){
+/**
+ * Creates the wrapper container for charts and tables - also write tables
+ * @param String $wrappername name of the div wrapper
+ * @param String $headername heading line - from moodle/lang
+ * @param String $chartoutput holds all information for the charts
+ * @param html_table $vtables table object for html_writer
+ * @return String $oretrun output-string
+ */
+function report_deviceanaltics_create_wrapper_container($wrappername, $headername, $chartoutput, $vtables) {
     global $OUTPUT;
     $oreturn = $OUTPUT->heading(get_string($headername, 'report_deviceanalytics'), 4);
     $oreturn .= $OUTPUT->container_start('wrapper', $wrappername);
@@ -106,10 +176,13 @@ function report_deviceanaltics_create_wrapper_container($wrappername, $headernam
     return $oreturn;
 }
 
-function report_deviceanalytics_create_data_tables($datas){
+/**
+ * Calculate the Tables
+ * @param Array $datas - preselected entries form data table
+ * @return String $returntables output-string
+ */
+function report_deviceanalytics_create_data_tables($datas) {
     $returntables = array();
-
-    // DEVICE TYPES
     $returntables[0] = new html_table();
     $returntables[0]->head = (array) get_strings(array('table_type', 'table_percent', 'table_count'), 'report_deviceanalytics');
     $devicetypes = array();
@@ -122,10 +195,9 @@ function report_deviceanalytics_create_data_tables($datas){
         }
     }
     foreach ($devicetypes as $tname => $count) {
-        $returntables[0]->data[] = array($tname, report_device_analytics_calc_percent($devicetypes, $tname)."%" ,$count);
+        $returntables[0]->data[] = array($tname, report_device_analytics_calc_percent($devicetypes, $tname)."%", $count);
     }
 
-    // OS
     $returntables[1] = new html_table();
     $returntables[1]->head = (array) get_strings(array('table_os', 'table_percent', 'table_count'), 'report_deviceanalytics');
     $deviceoses = array();
@@ -138,10 +210,9 @@ function report_deviceanalytics_create_data_tables($datas){
         }
     }
     foreach ($deviceoses as $tname => $count) {
-        $returntables[1]->data[] = array($tname, report_device_analytics_calc_percent($deviceoses, $tname)."%" ,$count);
+        $returntables[1]->data[] = array($tname, report_device_analytics_calc_percent($deviceoses, $tname)."%", $count);
     }
 
-    // BROWSER
     $returntables[2] = new html_table();
     $returntables[2]->head = (array) get_strings(array('table_browser', 'table_percent', 'table_count'), 'report_deviceanalytics');
     $devicebrowser = array();
@@ -161,16 +232,23 @@ function report_deviceanalytics_create_data_tables($datas){
         }
     }
     foreach ($devicebrowser as $bname => $sub) {
-        $returntables[2]->data[] = array('<b>'.$bname.'</b>', report_device_analytics_calc_percent_from_sub($devicebrowser, $bname).'%', report_device_analytics_calc_numbers_of_version($sub));
+        $returntables[2]->data[] = array(
+            '<b>'.report_device_analytics_calc_percent_from_sub($devicebrowser, $bname).'</b>',
+            report_device_analytics_calc_percent_from_sub($devicebrowser, $bname).'%',
+            report_device_analytics_calc_numbers_of_version($sub)
+        );
         foreach ($sub as $vnum => $scount) {
-            $returntables[2]->data[] = array(get_string('table_version','report_deviceanalytics').': '.$vnum,report_device_analytics_calc_percent($sub, $vnum).'%', $scount);   
+            $returntables[2]->data[] = array(
+                get_string('table_version', 'report_deviceanalytics').': '.$vnum,
+                report_device_analytics_calc_percent($sub, $vnum).'%',
+                $scount
+            );
         }
     }
 
     $returntables[3] = null;
     $returntables[4] = null;
 
-    // POINTING METHODE
     $returntables[5] = new html_table();
     $returntables[5]->head = (array) get_strings(array('table_pointing', 'table_percent', 'table_count'), 'report_deviceanalytics');
     $devicepointing = array();
@@ -183,13 +261,17 @@ function report_deviceanalytics_create_data_tables($datas){
         }
     }
     foreach ($devicepointing as $tname => $count) {
-        $returntables[5]->data[] = array($tname, report_device_analytics_calc_percent($devicepointing, $tname)."%" ,$count);
+        $returntables[5]->data[] = array($tname, report_device_analytics_calc_percent($devicepointing, $tname)."%", $count);
     }
 
     return $returntables;
 }
 
-function report_deviceanalytics_create_charts(){
+/**
+ * Create Canvas Elements for the charts output
+ * @return Array $returncharts array of canvas elements
+ */
+function report_deviceanalytics_create_charts() {
     $returncharts = array();
     $returncharts[0] = '<canvas class="rd_chart" id="chart_devicetypes"></canvas>';
     $returncharts[1] = '<canvas class="rd_chart" id="chart_devicesystems"></canvas>';
