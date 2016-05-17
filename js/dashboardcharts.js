@@ -7,7 +7,7 @@ function createCharts(datas){
 
     dtlabels = getTypeLabels(datas);
     var dtdatas = getTypeDatas(datas);
-    var dtcolors = getRandomColors(dtlabels.length);
+    var dtcolors = getColorsNum(dtdatas);
 
     var devicetypecanvas = $("#chart_devicetypes");
     var devicetypechart = new Chart(devicetypecanvas, {
@@ -23,7 +23,7 @@ function createCharts(datas){
 
     dslabels = getSystemLabels(datas);
     var dsdatas = getSystemDatas(datas);
-    var dscolors = getRandomColors(dslabels.length);
+    var dscolors = getColorsNum(dslabels);
 
     var devicesystemcanvas = $("#chart_devicesystems");
     var devicesystemchart = new Chart(devicesystemcanvas, {
@@ -51,7 +51,7 @@ function createCharts(datas){
 
     brlabels = getBrowserLabels(datas);
     var brdatas = getBrowserDatas(datas);
-    var brcolors = getRandomColors(brlabels.length);
+    var brcolors = getColorsNum(brlabels);
 
     var devicebrowsercanvas = $("#chart_devicebrowsers");
     var devicebrowserchart = new Chart(devicebrowsercanvas, {
@@ -72,6 +72,7 @@ function createCharts(datas){
         }
     }
     var displaydata = getDisplayDatasets(filtereddatas);
+    console.log(displaydata);
     var devicescreencanvas = $("#chart_devicedisplaysize");
     window.myScatter = Chart.Scatter(devicescreencanvas, {
         data: displaydata,
@@ -178,6 +179,10 @@ function convertTChartData(datacon){
             var setObject = new Object();
             setObject.label = datacon[ll].device;
             setObject.data = new Array();
+            var obColor = getColorByValue(chartdata.datasets);
+            setObject.backgroundColor = obColor;
+            setObject.pointBorderColor = obColor;
+            setObject.pointBackgroundColor = obColor;
             var inObject = new Object();
             inObject.x = datacon[ll].x;
             inObject.y = datacon[ll].y;
@@ -187,6 +192,14 @@ function convertTChartData(datacon){
     }
 
     return chartdata;
+}
+
+function resizetocount(val, max){
+    if(val >= max){
+        return max;
+    } else {
+        return val;
+    }
 }
 
 function checkifexistsinArray(set, look){
@@ -222,13 +235,13 @@ function getTypeLabels(datas){
 }
 
 function getSystemLabels(datas){
-    var td = [];
+    var ts = [];
     $.each(datas, function(index, value) {
-        if($.inArray(value.devicesystem, td) === -1) {
-            td.push(value.devicesystem);
+        if($.inArray(value.devicesystem, ts) === -1) {
+            ts.push(value.devicesystem);
         }
     });
-    return td;
+    return ts;
 }
 
 function getBrowserLabels(datas){
@@ -292,7 +305,6 @@ function getBrowserDatas(datas){
     return dtwrap;
 }
 
-
 function getRandomColors(num){
     var colors = [];
     for (i = 0; i < num; i++) {
@@ -302,7 +314,21 @@ function getRandomColors(num){
 }
 
 function getRandomColor() {
-    var value = Math.random() * 0xFF | 0;
-    var grayscale = (value << 16) | (value << 8) | value;
-    return '#' + grayscale.toString(16);
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+function getColorsNum(cdatas){
+    var colors = [];
+    for (i = 0; i < cdatas.length; i++) {
+        colors.push(getColorByValue(colors));
+    }
+    return colors;
+}
+
+function getColorByValue(list){
+    var collist = ['#ce4d45', '#f19c65', '#ffd265', '#2aa876', '#0a7b83', '#588c7e', '#f2e394', '#f2ae72', '#d96459', '#8c4646'];
+    if(list.length >= collist.length) {
+        return getRandomColor();
+    }
+    return collist[list.length];
 }
