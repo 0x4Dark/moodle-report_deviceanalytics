@@ -26,6 +26,6 @@ $plugin->component = 'report_deviceanalytics';
 $plugin->version = 2016051700;
 $plugin->release = 'v1.1';
 $plugin->requires = 2014111000;
-$plugin->maturity = MATURITY_BETA;
+$plugin->maturity = MATURITY_STABLE;
 $plugin->cron = 0;
 $plugin->dependencies = array();

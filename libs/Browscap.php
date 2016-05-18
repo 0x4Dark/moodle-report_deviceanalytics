@@ -1,7 +1,4 @@
 <?php
-
-namespace phpbrowscap;
-
 /**
  * Browscap.ini parsing class with caching and update capabilities
  *
@@ -27,12 +24,27 @@ namespace phpbrowscap;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package    Browscap
+ * @package    report_deviceanalytics
+ * @subpackage Browscap
  * @author     Jonathan Stoppani <jonathan@stoppani.name>
  * @author     Vítor Brandão <noisebleed@noiselabs.org>
  * @author     Mikołaj Misiurewicz <quentin389+phpb@gmail.com>
  * @copyright  Copyright (c) 2006-2012 Jonathan Stoppani
- * @version    1.0
+ * @license    http://www.opensource.org/licenses/MIT MIT License
+ * @link       https://github.com/GaretJax/phpbrowscap/
+ */
+
+namespace phpbrowscap;
+
+/**
+ * Browscap Class
+ *
+ * @package    report_deviceanalytics
+ * @subpackage Browscap
+ * @author     Jonathan Stoppani <jonathan@stoppani.name>
+ * @author     Vítor Brandão <noisebleed@noiselabs.org>
+ * @author     Mikołaj Misiurewicz <quentin389+phpb@gmail.com>
+ * @copyright  Copyright (c) 2006-2012 Jonathan Stoppani
  * @license    http://www.opensource.org/licenses/MIT MIT License
  * @link       https://github.com/GaretJax/phpbrowscap/
  */
@@ -43,30 +55,51 @@ class Browscap
      */
     const VERSION = '2.1.1';
 
+    /**
+     * Current version of the cache system
+     */
     const CACHE_FILE_VERSION = '2.1.0';
 
     /**
-     * Different ways to access remote and local files.
-     *
      * UPDATE_FOPEN: Uses the fopen url wrapper (use file_get_contents).
-     * UPDATE_FSOCKOPEN: Uses the socket functions (fsockopen).
-     * UPDATE_CURL: Uses the cURL extension.
-     * UPDATE_LOCAL: Updates from a local file (file_get_contents).
      */
     const UPDATE_FOPEN     = 'URL-wrapper';
+    /**
+     * UPDATE_FSOCKOPEN: Uses the socket functions (fsockopen).
+     */
     const UPDATE_FSOCKOPEN = 'socket';
+    /**
+     * UPDATE_CURL: Uses the cURL extension.
+     */
     const UPDATE_CURL      = 'cURL';
+    /**
+     * UPDATE_LOCAL: Updates from a local file (file_get_contents).
+     */
     const UPDATE_LOCAL     = 'local';
 
     /**
      * Options for regex patterns.
      *
      * REGEX_DELIMITER: Delimiter of all the regex patterns in the whole class.
-     * REGEX_MODIFIERS: Regex modifiers.
      */
     const REGEX_DELIMITER               = '@';
+    /**
+     * Options for regex patterns.
+     *
+     * REGEX_MODIFIERS: Regex modifiers.
+     */
     const REGEX_MODIFIERS               = 'i';
+    /**
+     * Options for regex patterns.
+     *
+     * COMPRESSION_PATTERN_START: Compression modifiers.
+     */
     const COMPRESSION_PATTERN_START     = '@';
+    /**
+     * Options for regex patterns.
+     *
+     * COMPRESSION_PATTERN_DELIMITER: Compression Delimiter.
+     */
     const COMPRESSION_PATTERN_DELIMITER = '|';
 
     /**
@@ -74,6 +107,9 @@ class Browscap
      */
     const VALUES_TO_QUOTE = 'Browser|Parent';
 
+    /**
+     * The version key
+     */
     const BROWSCAP_VERSION_KEY = 'GJK_Browscap_Version';
 
     /**
@@ -87,29 +123,35 @@ class Browscap
     const COUNT_PATTERN = 100;
 
     /**
-     * Options for auto update capabilities
-     *
-     * $remoteVerUrl: The location to use to check out if a new version of the
-     *                browscap.ini file is available.
-     * $remoteIniUrl: The location from which download the ini file.
-     *                The placeholder for the file should be represented by a %s.
-     * $timeout: The timeout for the requests.
-     * $updateInterval: The update interval in seconds.
-     * $errorInterval: The next update interval in seconds in case of an error.
-     * $doAutoUpdate: Flag to disable the automatic interval based update.
-     * $updateMethod: The method to use to update the file, has to be a value of
-     *                an UPDATE_* constant, null or false.
-     *
-     * The default source file type is changed from normal to full. The performance difference
-     * is MINIMAL, so there is no reason to use the standard file whatsoever. Either go for light,
-     * which is blazing fast, or get the full one. (note: light version doesn't work, a fix is on its way)
+     * @var $remoteIniUrl: The location from which download the ini file.
+     *                     The placeholder for the file should be represented by a %s.
      */
     public $remoteIniUrl = 'http://browscap.org/stream?q=PHP_BrowscapINI';
+    /**
+     * @var $remoteVerUrl: The location to use to check out if a new version of the
+     *                     browscap.ini file is available.
+     */
     public $remoteVerUrl = 'http://browscap.org/version';
+    /**
+     * @var $timeout: The timeout for the requests.
+     */
     public $timeout = 5;
-    public $updateInterval = 432000; // 5 days
-    public $errorInterval = 7200; // 2 hours
+    /**
+     * @var $updateInterval: The update interval in seconds.
+     */
+    public $updateInterval = 432000;
+    /**
+     * @var $errorInterval: The next update interval in seconds in case of an error.
+     */
+    public $errorInterval = 7200;
+    /**
+     * @var $doAutoUpdate: Flag to disable the automatic interval based update.
+     */
     public $doAutoUpdate = true;
+    /**
+     * @var $updateMethod: The method to use to update the file, has to be a value of
+     *                an UPDATE_* constant, null or false.
+     */
     public $updateMethod = null;
 
     /**
@@ -180,9 +222,29 @@ class Browscap
      * @var array
      */
     protected $_userAgents = array();
+    /**
+     * Where to store browsers
+     *
+     * @var array
+     */
     protected $_browsers = array();
+    /**
+     * Where to store patterns
+     *
+     * @var array
+     */
     protected $_patterns = array();
+    /**
+     * Where to store properties
+     *
+     * @var array
+     */
     protected $_properties = array();
+    /**
+     * Where to store the source version
+     *
+     * @var array
+     */
     protected $_source_version;
 
     /**
@@ -246,6 +308,7 @@ class Browscap
     }
 
     /**
+     * Get the current source version
      * @return mixed
      */
     public function getSourceVersion()
@@ -254,6 +317,7 @@ class Browscap
     }
 
     /**
+     * Check if the cache needs to be updated
      * @return bool
      */
     public function shouldCacheBeUpdated()
@@ -859,6 +923,7 @@ class Browscap
     }
 
     /**
+     * Sort the properties by keys
      * @param array $properties
      * @param array $propertiesKeys
      *
@@ -880,6 +945,7 @@ class Browscap
     }
 
     /**
+     * Deduplicate Patterns
      * @param array $tmpPatterns
      *
      * @return array
@@ -909,6 +975,7 @@ class Browscap
     }
 
     /**
+     * Compare function for strings
      * @param string $a
      * @param string $b
      *
@@ -1199,6 +1266,7 @@ class Browscap
     }
 
     /**
+     * Sanitize conten by regex
      * @param string $content
      *
      * @return mixed
@@ -1445,10 +1513,10 @@ class Browscap
 /**
  * Browscap.ini parsing class exception
  *
- * @package    Browscap
+ * @package    report_deviceanalytics
+ * @subpackage Browscap
  * @author     Jonathan Stoppani <jonathan@stoppani.name>
  * @copyright  Copyright (c) 2006-2012 Jonathan Stoppani
- * @version    1.0
  * @license    http://www.opensource.org/licenses/MIT MIT License
  * @link       https://github.com/GaretJax/phpbrowscap/
  */
