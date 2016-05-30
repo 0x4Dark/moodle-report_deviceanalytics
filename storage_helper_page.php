@@ -25,11 +25,7 @@
 require_once('lib.php');
 ini_set('memory_limit' , '1024M');
 require_login();
-if ((isset($_SERVER['HTTPS'])) and ('on' == $_SERVER['HTTPS'])) {
-    $CFG->httpswwwroot = 'https://'.$_SERVER['HTTP_HOST'];
-} else {
-    $CFG->httpwwwroot = 'http://'.$_SERVER['HTTP_HOST'];
-}
+
 $systemcontext = context_system::instance();
 $PAGE->set_context($systemcontext);
 $PAGE->set_url('/report/deviceanalytics/storage_helper_page.php');
@@ -61,7 +57,6 @@ echo $OUTPUT->header();
                 url: ajaxurl,
                 data: screensize,
             }).done(function(html) {
-                console.log(html);
                 window.location.replace("<?php echo $CFG->wwwroot; ?>");
             });
         }

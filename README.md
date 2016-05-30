@@ -1,5 +1,5 @@
 # moodle-report_deviceanalytics
-The device analytics plugin provides the administrator a quick overview of the user used devices. It stores, every time a user logged in, various data of the devices. These can be viewed on a dashboard in graphically andtabular form. A temporal limitation of the desired data is also possible.
+The device analytics plugin provides the administrator a quick overview of the users used devices. It stores, every time a user logged in, various data of the devices. These can be viewed on a dashboard in graphically and tabular form. A temporal limitation of the desired data is also possible.
 Currently datas are:
  - Devicetype
  - Operating System
