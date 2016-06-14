@@ -41,7 +41,7 @@ $PAGE->set_heading($pagetitle);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_cacheable(false);
 $PAGE->requires->css('/report/deviceanalytics/css/dashboard_css.css');
-$PAGE->requires->js('/report/deviceanalytics/libs/jquery-1.12.2.min.js', true);
+$PAGE->requires->js('/report/deviceanalytics/libs/jquery-3.0.0.min.js', true);
 $PAGE->requires->js('/report/deviceanalytics/libs/Chart.min.js', true);
 $PAGE->requires->js('/report/deviceanalytics/js/dashboardcharts.js', false);
 

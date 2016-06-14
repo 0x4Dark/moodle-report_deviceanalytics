@@ -31,7 +31,7 @@ $PAGE->set_context($systemcontext);
 $PAGE->set_url('/report/deviceanalytics/storage_helper_page.php');
 $PAGE->set_pagelayout('redirect');
 $PAGE->requires->css('/report/deviceanalytics/css/storage_helper_page_css.css');
-$PAGE->requires->js('/report/deviceanalytics/libs/jquery-1.12.2.min.js', true);
+$PAGE->requires->js('/report/deviceanalytics/libs/jquery-3.0.0.min.js', true);
 
 $datastorage = new deviceanalytics_data_storage();
 $insertid = $datastorage->deviceanalytics_user_loggedin();
