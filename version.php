@@ -23,8 +23,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'report_deviceanalytics';
-$plugin->version = 2016051700;
-$plugin->release = 'v1.1';
+$plugin->version = 2016061400;
+$plugin->release = 'v1.2';
 $plugin->requires = 2014111000;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->cron = 0;

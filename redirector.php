@@ -37,6 +37,12 @@ class deviceanalytics_redirector{
      */
     public static function init($eventdata) {
         global $CFG;
+        global $DB;
+        $dbman = $DB->get_manager();
+        if (! $dbman->table_exists('report_deviceanalytics')) {
+            return 0;
+        }
+
         if (isloggedin()) {
             if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
                 $url = preg_replace("/^http:/i", "https:", $CFG->wwwroot);
