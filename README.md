@@ -8,7 +8,7 @@ Currently datas are:
  - Windowsize | if js is enabled
  - Inputtype | like mouse or touchscreen
 
-## NOT OFFICIAL VERSION - JUST BRANCH WITH HIGHCARTS FOR PRIVATE USE
+## NOT OFFICIAL VERSION - JUST BRANCH WITH HIGHCHARTS FOR PRIVATE USE
 
 ### Language
 The Plugin supports 2 languages:
