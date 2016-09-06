@@ -81,7 +81,7 @@ class deviceanalytics_data_storage{
         if ($pluginsetting->anonymous == 0) {
             $currentdevicedata->userid = $USER->id;
         }
-        $currentdevicedata->userhash = deviceanalytics_data_object::get_identify_hash($_SESSION['USER']);
+        $currentdevicedata->userhash = $this->get_session_hash();
         $alreadyexits = $DB->get_record_sql('SELECT * FROM {report_deviceanalytics_data} WHERE userhash = ?',
             array($currentdevicedata->userhash));
 
@@ -107,6 +107,14 @@ class deviceanalytics_data_storage{
 
         $insertid = $DB->insert_record('report_deviceanalytics_data', $currentdevicedata, true);
         return $insertid;
+    }
+
+    /**
+     * identify user session
+     * @return String hash of sesskey
+     */
+    public function get_session_hash(){
+        return md5(sesskey());
     }
 
     /**

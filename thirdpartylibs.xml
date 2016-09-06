@@ -15,10 +15,10 @@
         <licenseversion>1.0</licenseversion>
     </library>
     <library>
-        <location>libs/Chart.min.js</location>
-        <name>Chart.js</name>
-        <version>2.1.2</version>
-        <license>MIT License</license>
-        <licenseversion>1.0</licenseversion>
+        <location>libs/highcharts/</location>
+        <name>Highcharts</name>
+        <version>4.2.6</version>
+        <license>Creative Commons Attribution-NonCommercial</license>
+        <licenseversion>3.0</licenseversion>
     </library>
 </libraries>

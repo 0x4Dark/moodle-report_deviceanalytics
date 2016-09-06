@@ -14,8 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+require_once('classes/deviceanalytics_data_storage_class.php');
+require_once('classes/deviceanalytics_data_object_class.php');
+
 /**
- * redirect to the helper page
+ * eventhandler files
  *
  * @package    report_deviceanalytics
  * @copyright  2016 Mark Heumueller <mark.heumueller@gmx.de>
@@ -39,11 +42,19 @@ class deviceanalytics_redirector{
         global $CFG;
         global $DB;
         $dbman = $DB->get_manager();
+
         if (! $dbman->table_exists('report_deviceanalytics')) {
             return 0;
         }
-
-        if (isloggedin()) {
+        $daconf = $DB->get_record('report_deviceanalytics', array('id'=>1));
+        if (is_null($daconf->status) || $daconf->status == 0) {
+            return 0;
+        }
+        if (is_null($daconf->jsmode) || $daconf->jsmode == 0) {
+            $datastorage = new deviceanalytics_data_storage();
+            $datastorage->deviceanalytics_user_loggedin();
+        }
+        elseif (isloggedin()) {
             if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
                 $url = preg_replace("/^http:/i", "https:", $CFG->wwwroot);
                 redirect($url.'/report/deviceanalytics/storage_helper_page.php');

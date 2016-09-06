@@ -128,10 +128,12 @@ class deviceanalytics_data_object{
         }
         $this->httpacclang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
     }
+
     /**
      * Creating a hash based on userrsession - used for anonymization
      * @param moodle_session $usersession
      * @return String hash
+     * @deprecated
      */
     public static function get_identify_hash($usersession) {
         $usersession = $usersession->sesskey;

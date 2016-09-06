@@ -36,14 +36,12 @@ class deviceanalytics_settings_form extends moodleform{
     public function definition() {
         global $CFG;
         $mform = $this->_form;
-        $startattr = array('readonly' => 'readonly');
-        $mform->addElement('text', 'starttime', get_string('settings_starttime', 'report_deviceanalytics'), $startattr);
-        $mform->setType('starttime', PARAM_RAW);
         $mform->addElement('hidden', 'id', '1');
         $mform->setType('id', PARAM_RAW);
         $mform->addElement('selectyesno', 'status', get_string('settings_status', 'report_deviceanalytics'));
         $mform->addElement('selectyesno', 'anonymous', get_string('settings_anonymous', 'report_deviceanalytics'));
         $mform->addElement('selectyesno', 'adminlog', get_string('settings_admin_log', 'report_deviceanalytics'));
+        $mform->addElement('selectyesno', 'jsmode', get_string('settings_jsmode', 'report_deviceanalytics'));
         $this->add_action_buttons();
     }
 }

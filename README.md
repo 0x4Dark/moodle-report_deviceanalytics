@@ -8,15 +8,17 @@ Currently datas are:
  - Windowsize | if js is enabled
  - Inputtype | like mouse or touchscreen
 
+## NOT OFFICIAL VERSION - JUST BRANCH WITH HIGHCARTS FOR PRIVATE USE
+
 ### Language
 The Plugin supports 2 languages:
  - Englisch
  - German
  
 ### Version
-Current version: **2016051700** 
+Current version: **2016061400** 
 moodle requires: **2014111000** 
-moodle versions: 2.8, 2.9 
+moodle versions: 2.8, 2.9 , 3.0, 3.1
 will be installed into /report/deviceanalytics
 
 ### Credits
@@ -24,10 +26,10 @@ For HTTP Header interpreting this plugin is using:
 http://browscap.org/ - Version: 2.1.1
 MIT License
 
-Chart.js - For Dashboard Charts
-http://www.chartjs.org/- Version: 2.1.2
-MIT License
+Highcharts - Used in Dashboard
+http://highcharts.com/ - Version: 4.2.6 
+Creative Commons Attribution-NonCommercial 3.0 License
 
-jQuery - For Dashboard Charts
+jQuery - Used in Dashboard
 https://jquery.org/ - Version: 1.12.2
 MIT License

@@ -59,5 +59,6 @@ $string['settings_status'] = 'Active';
 $string['settings_anonymous'] = 'Anonymize';
 $string['settings_anonymous_description'] = 'If the user data will be stored anonymously';
 $string['settings_admin_log'] = 'Admin Log';
+$string['settings_jsmode'] = 'Javascript Mode';
 $string['settings_cancelled'] = 'Nothing was changed!';
 $string['settings_updated'] = 'Settings was updated successfully!';

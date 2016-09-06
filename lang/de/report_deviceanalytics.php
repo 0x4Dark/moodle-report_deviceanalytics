@@ -57,5 +57,6 @@ $string['settings_status'] = 'Aktiv';
 $string['settings_anonymous'] = 'Anonymisiert';
 $string['settings_anonymous_description'] = 'ob Nutzerdaten zuortbar seien sollen';
 $string['settings_admin_log'] = 'Admin Log';
+$string['settings_jsmode'] = 'Javascript Modus';
 $string['settings_cancelled'] = 'Es wurde nichts verändert!';
 $string['settings_updated'] = 'Einstellungen wurden erfolgreich aktualisiert!';

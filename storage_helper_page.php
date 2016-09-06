@@ -26,6 +26,9 @@ require_once('lib.php');
 ini_set('memory_limit' , '1024M');
 require_login();
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $systemcontext = context_system::instance();
 $PAGE->set_context($systemcontext);
 $PAGE->set_url('/report/deviceanalytics/storage_helper_page.php');
